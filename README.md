@@ -5,17 +5,17 @@ It is directly able to open the video with your default player, once the subtitl
 Subify uses [SubDB Web API](http://thesubdb.com/) to get subtitles. It also considers that you use a default player interpreting srt subtitles when the video file name is the same than the srt file (ex: [VLC](http://www.videolan.org/vlc/)).
 
 ## Installing
-Download the last version of Subify : https://github.com/matcornic/subify/releases (Works on Unix, Mac OS and Windows)
+Download the [last version of Subify](https://github.com/matcornic/subify/releases), and that's it. No need to install something else. Works on Linux, Mac OS (Darwin) and Windows
 
-If you have Golang, you can get Subify and its binary with :
+If you use Golang, you can get Subify and its binary directly with :
 ```shell
 go get -v github.com/matcornic/subify
 ```
 
-You may want to create a Service Automator with Mac OS in order to add a "Subify" option in the Finder menu for your videos. Then, you will be able to do "Right click > Subify", and enjoy your video
+On Mac OS, you can also create a Service Automator, in order to [add a "Subify" option in the Finder menu for your videos](https://github.com/matcornic/subify/wiki/Adding-a-Subify-option-in-the-Finder-menu-for-your-videos).
 
 ## Get started
-Note : the binary is usable as is, but make sure to add Subify to your PATH environment variable, to run the command from anywhere on your OS.
+Note : the binary is usable as is, if you want to run the command from anywhere on your OS, make sure to add Subify home installation to your PATH environment variable
 
 ```shell
 # Download subtitle with default language
@@ -88,6 +88,7 @@ You've developed a cool feature or fixed a bug ?
 2. Auto update command
 3. Upload command to contribute to SubDB database
 4. Vendoring
+5. Doc on default configuration (for example to change the default language for all downloads)
 
 ## License
 Subify is released under the Apache 2.0 license. See LICENSE.txt
