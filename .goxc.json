@@ -1,0 +1,14 @@
+{
+	"Tasks": [
+		"default",
+		"publish-github"
+	],
+	"PackageVersion": "0.1.0",
+	"TaskSettings": {
+		"publish-github": {
+			"owner": "matcornic",
+			"repository": "subify"
+		}
+	},
+	"ConfigVersion": "0.9"
+}

@@ -42,6 +42,6 @@ Give the path of your video as first parameter and let's go !`,
 func init() {
 	dlCmd.Flags().StringVarP(&language, "language", "l", "en", "Language of the subtitle")
 	viper.BindPFlag("language", dlCmd.Flags().Lookup("language"))
-	dlCmd.Flags().BoolVarP(&openVideo, "open", "o", false, "Once the subtitle is donwloaded, open the video with your default video player")
+	dlCmd.Flags().BoolVarP(&openVideo, "open", "o", false, "Once the subtitle is donwloaded, open the video with your default video player (OSX: \"open\", Windows: \"start\", Linux/Other: \"xdg-open\")")
 	RootCmd.AddCommand(dlCmd)
 }

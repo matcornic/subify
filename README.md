@@ -5,7 +5,7 @@ It is directly able to open the video with your default player, once the subtitl
 Subify uses [SubDB Web API](http://thesubdb.com/) to get subtitles. It also considers that you use a default player interpreting srt subtitles when the video file name is the same than the srt file (ex: [VLC](http://www.videolan.org/vlc/)).
 
 ## Installing
-Download the last version of the Subify : xxx (Works on Unix, Mac OS and Windows)
+Download the last version of Subify : https://github.com/matcornic/subify/releases (Works on Unix, Mac OS and Windows)
 
 If you have Golang, you can get Subify and its binary with :
 ```shell
@@ -15,7 +15,7 @@ go get -v github.com/matcornic/subify
 You may want to create a Service Automator with Mac OS in order to add a "Subify" option in the Finder menu for your videos. Then, you will be able to do "Right click > Subify", and enjoy your video
 
 ## Get started
-Note : the binary is usable as is, but ensure to add Subify to your PATH environment variable, to run the command from anywhere on your OS.
+Note : the binary is usable as is, but make sure to add Subify to your PATH environment variable, to run the command from anywhere on your OS.
 
 ```shell
 # Download subtitle with default language
@@ -60,7 +60,7 @@ Aliases:
 
 Flags:
   -l, --language string   Language of the subtitle (default "en")
-  -o, --open              Once the subtitle is donwloaded, open the video with your default video player
+  -o, --open              Once the subtitle is donwloaded, open the video with your default video player (OSX: "open", Windows: "start", Linux/Other: "xdg-open")
 
 Global Flags:
       --config string   Config file (default is $HOME/.subify.json). Build a file like this to change default behaviour
@@ -73,16 +73,21 @@ Global Flags:
   * Implement firs init
 
 ## Contributing
-1. Fork it
-2. Create your feature branch (git checkout -b my-new-feature)
-3. Commit your changes (git commit -am 'Add some feature')
-4. Push to the branch (git push origin my-new-feature)
-5. Create new Pull Request
+
+You've developed a cool feature or fixed a bug ?
+
+1. Fork the repo
+2. Create an issue  
+3. Create your feature branch (git checkout -b my-new-feature)
+4. Commit your changes (git commit -am 'Add some feature')
+5. Push to the branch (git push origin my-new-feature)
+6. Create new Pull Request
 
 ## TODO
 1. List of favorite languages (Downloads the first to match)
 2. Auto update command
 3. Upload command to contribute to SubDB database
+4. Vendoring
 
 ## License
 Subify is released under the Apache 2.0 license. See LICENSE.txt
