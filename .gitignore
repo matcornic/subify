@@ -23,4 +23,9 @@ _testmain.go
 *.test
 *.prof
 
+# Intellij Idea
+.idea
+
 .goxc.local.json
+
+subify

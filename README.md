@@ -90,6 +90,7 @@ You've developed a cool feature or fixed a bug ?
 4. Vendoring
 5. Doc on default configuration (for example to change the default language for all downloads)
 6. Use OpenSubtitles API and/or Addic7ed (better quality of translations, but no API)
+7. Localization/Internationalization
 
 ## License
 Subify is released under the Apache 2.0 license. See LICENSE.txt

@@ -1,14 +1,12 @@
 package subtitles
 
 import (
-	"fmt"
-	"github.com/matcornic/subify/common/config"
-	"github.com/matcornic/subify/common/utils"
-	"github.com/matcornic/subify/subtitles/subdb"
+	"github.com/vincentdaniel/subify/common/utils"
+	"github.com/vincentdaniel/subify/subtitles/subdb"
 	"github.com/spf13/viper"
 	"io/ioutil"
-	"os"
 	"path/filepath"
+	logger "github.com/spf13/jwalterweatherman"
 )
 
 // Download the subtitle from the video identified by its path
@@ -21,7 +19,7 @@ func Download(videoPath string) {
 	subtitlePath := buildSubtitleName(videoPath)
 	saveSubtitle(subtitle, subtitlePath)
 
-	fmt.Println("Subtitle (" + viper.GetString("language") + ") found and saved to " + subtitlePath)
+	logger.INFO.Println("Subtitle (", viper.GetString("language"), ") found and saved to ", subtitlePath)
 }
 
 func buildSubtitleName(pathVideo string) string {
@@ -33,9 +31,6 @@ func buildSubtitleName(pathVideo string) string {
 func saveSubtitle(content []byte, subtitlePath string) {
 	err := ioutil.WriteFile(subtitlePath, content, 0644)
 	if err != nil {
-		if config.Verbose {
-			fmt.Fprintln(os.Stderr, err)
-		}
-		utils.Exit("Can't save the file %v", subtitlePath)
+		utils.ExitPrintError(err, "Can't save the file %v", subtitlePath)
 	}
 }

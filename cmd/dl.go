@@ -1,14 +1,13 @@
 package cmd
 
 import (
-	"fmt"
-	"github.com/matcornic/subify/common/config"
-	"github.com/matcornic/subify/common/utils"
-	"github.com/matcornic/subify/subtitles"
+	"github.com/vincentdaniel/subify/common/utils"
+	"github.com/vincentdaniel/subify/subtitles"
 	"github.com/skratchdot/open-golang/open"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 	"strings"
+	logger "github.com/spf13/jwalterweatherman"
 )
 
 var language string
@@ -23,9 +22,8 @@ var dlCmd = &cobra.Command{
 Give the path of your video as first parameter and let's go !`,
 	Run: func(cmd *cobra.Command, args []string) {
 		// Assertions
-		if config.Verbose {
-			fmt.Println("Downloading command called with following parameters : " + strings.Join(args, " "))
-		}
+		utils.VerbosePrintln(logger.INFO,
+			"Downloading command called with following parameters : " + strings.Join(args, " "))
 		if len(args) != 1 {
 			utils.Exit("Video file needed. See usage : 'subify help' or 'subify dl --help'")
 		}
@@ -42,6 +40,8 @@ Give the path of your video as first parameter and let's go !`,
 func init() {
 	dlCmd.Flags().StringVarP(&language, "language", "l", "en", "Language of the subtitle")
 	viper.BindPFlag("language", dlCmd.Flags().Lookup("language"))
-	dlCmd.Flags().BoolVarP(&openVideo, "open", "o", false, "Once the subtitle is donwloaded, open the video with your default video player (OSX: \"open\", Windows: \"start\", Linux/Other: \"xdg-open\")")
+	dlCmd.Flags().BoolVarP(&openVideo, "open", "o", false,
+		"Once the subtitle is donwloaded, open the video with your default video player" +
+		` (OSX: "open", Windows: "start", Linux/Other: "xdg-open")`)
 	RootCmd.AddCommand(dlCmd)
 }

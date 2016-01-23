@@ -1,7 +1,11 @@
 package main
 
-import "github.com/matcornic/subify/cmd"
+import (
+	"github.com/vincentdaniel/subify/cmd"
+	"github.com/vincentdaniel/subify/common/utils"
+)
 
 func main() {
+	utils.InitLoggingConf()
 	cmd.Execute()
 }
