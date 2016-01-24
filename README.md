@@ -2,7 +2,11 @@
 Subify is a tool to download subtitles for your favorite TV shows and movies.
 It is directly able to open the video with your default player, once the subtitle is downloaded.
 
-Subify uses [SubDB Web API](http://thesubdb.com/) to get subtitles. It also considers that you use a default player interpreting srt subtitles when the video file name is the same than the srt file (ex: [VLC](http://www.videolan.org/vlc/)).
+Subify uses [SubDB Web API](http://thesubdb.com/) and [OpenSubtitles API](http://trac.opensubtitles.org/projects/opensubtitles/wiki) to get subtitles. It also considers that you use a default player interpreting srt subtitles when the video file name is the same than the srt file (ex: [VLC](http://www.videolan.org/vlc/)).
+
+Subify gets the best match from several APIs in this order
+1. SubDB
+2. OpenSubtitles
 
 ## Installing
 Download the [last version of Subify](https://github.com/matcornic/subify/releases), and that's it. No need to install something else. Works on Linux, Mac OS (Darwin) and Windows
@@ -70,7 +74,7 @@ Global Flags:
 
 ## Release Notes
 * **0.1.0** Jan 15, 2016
-  * Implement firs init
+  * Implement first init
 
 ## Contributing
 
@@ -86,10 +90,10 @@ You've developed a cool feature or fixed a bug ?
 ## TODO
 1. List of favorite languages (Downloads the first to match)
 2. Auto update command
-3. Upload command to contribute to SubDB database
+3. Upload command to contribute to SubDB/OpenSubtitles database
 4. Vendoring
 5. Doc on default configuration (for example to change the default language for all downloads)
-6. Use OpenSubtitles API and/or Addic7ed (better quality of translations, but no API)
+6. Add Addic7ed API (better quality of translations, but no real API)
 7. Localization/Internationalization
 
 ## License
