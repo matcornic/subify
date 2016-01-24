@@ -58,7 +58,7 @@ func getHashOfVideo(filename string) (string, error) {
 	bufB = append(bufB, bufE...)
 	hash := fmt.Sprintf("%x", md5.Sum(bufB))
 
-	utils.VerbosePrintln(logger.INFO, "Hash of video is "+hash)
+	utils.VerbosePrintln(logger.INFO, "SubDB Hash of video is "+hash)
 
 	return hash, nil
 }
