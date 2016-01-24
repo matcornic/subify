@@ -4,6 +4,7 @@ import (
 	"log"
 	"os"
 
+	"github.com/matcornic/subify/common/config"
 	logger "github.com/spf13/jwalterweatherman"
 )
 
@@ -21,5 +22,10 @@ func InitLoggingConf() {
 
 	for _, log := range errorLoggers {
 		log.SetOutput(os.Stderr)
+	}
+
+	if config.Verbose {
+		logger.INFO.SetOutput(os.Stdout)
+		logger.WARN.SetOutput(os.Stdout)
 	}
 }

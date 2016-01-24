@@ -14,6 +14,10 @@ var RootCmd = &cobra.Command{
 	Short: "Tool to handle subtitles for your best TV Shows and movies",
 	Long: `Tool to handle subtitles for your best TV Shows and movies
 http://github.com/matcornic/subify`,
+	PersistentPreRun: func(cmd *cobra.Command, args []string) {
+		// Assertions
+		utils.InitLoggingConf()
+	},
 }
 
 // Execute adds all child commands to the root command sets flags appropriately.
