@@ -52,7 +52,7 @@ func GetHashOfVideo(filename string) string {
 }
 
 func VerbosePrintln(logger *log.Logger, log string) {
-	if config.Verbose {
+	if config.Verbose && log != "" {
 		logger.Println(log)
 	}
 }
@@ -74,10 +74,9 @@ func ExitPrintError(err error, format string, args ...interface{}) {
  * Exit func displays an error message on stderr and exit 1
  * Eventually prints more details if any verbose details are given and verbose mode is enabled
  */
-func ExitVerbose(verbose string, format string, args ...interface{}) {
-	if verbose != "" {
-		VerbosePrintln(logger.ERROR, verbose)
-	} else if !config.Verbose {
+func ExitVerbose(verboseLog string, format string, args ...interface{}) {
+	VerbosePrintln(logger.ERROR, verboseLog)
+	if !config.Verbose {
 		logger.ERROR.Println("Run subify with --verbose option to get more information about the error")
 	}
 	logger.FATAL.Printf(format)

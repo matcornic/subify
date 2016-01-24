@@ -55,9 +55,7 @@ func initConfig() {
 	// If a config file is found, read it in.
 	err := viper.ReadInConfig()
 	if err == nil {
-		if config.Verbose {
-			logger.INFO.Println("Using config file:", viper.ConfigFileUsed())
-		}
+		utils.VerbosePrintln(logger.INFO, "Using config file:" + viper.ConfigFileUsed())
 	} else {
 		logger.WARN.Println("Could not read config file (", viper.ConfigFileUsed(), "): ", err)
 	}

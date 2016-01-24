@@ -9,6 +9,7 @@ import (
 	"github.com/spf13/viper"
 	"io/ioutil"
 	"time"
+	logger "github.com/spf13/jwalterweatherman"
 )
 
 const (
@@ -37,9 +38,7 @@ func buildURL(hash string, language string) string {
 	v, _ := query.Values(opt)
 
 	url := baseURL + "?" + v.Encode()
-	if config.Verbose {
-		fmt.Println("SubdbURL is : " + url)
-	}
+	utils.VerbosePrintln(logger.INFO, "SubdbURL is : " + url)
 
 	return url
 }
