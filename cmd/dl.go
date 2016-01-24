@@ -30,7 +30,10 @@ Give the path of your video as first parameter and let's go !`,
 		}
 
 		videoPath := args[0]
-		subtitles.Download(videoPath)
+		err := subtitles.Download(videoPath)
+		if err != nil {
+			utils.ExitPrintError(err, "Can't download subtitles")
+		}
 
 		if openVideo {
 			open.Run(videoPath)
