@@ -2,20 +2,21 @@ package subdb
 
 import (
 	"fmt"
+	"io/ioutil"
+	"time"
+
 	"github.com/google/go-querystring/query"
 	"github.com/lafikl/fluent"
 	"github.com/matcornic/subify/common/config"
 	"github.com/matcornic/subify/common/utils"
-	"github.com/spf13/viper"
-	"io/ioutil"
-	"time"
 	logger "github.com/spf13/jwalterweatherman"
+	"github.com/spf13/viper"
 )
 
 const (
-	userAgent = "SubDB/1.0 (Subify/0.1; http://github.com/matcornic/subify)"
-	devURL    = "http://sandbox.thesubdb.com/"
-	prodURL   = "http://api.thesubdb.com/"
+	userAgent       = "SubDB/1.0 (Subify/0.1; http://github.com/matcornic/subify)"
+	devURL          = "http://sandbox.thesubdb.com/"
+	prodURL         = "http://api.thesubdb.com/"
 	defaultLanguage = "en"
 )
 
@@ -38,7 +39,7 @@ func buildURL(hash string, language string) string {
 	v, _ := query.Values(opt)
 
 	url := baseURL + "?" + v.Encode()
-	utils.VerbosePrintln(logger.INFO, "SubdbURL is : " + url)
+	utils.VerbosePrintln(logger.INFO, "SubdbURL is : "+url)
 
 	return url
 }

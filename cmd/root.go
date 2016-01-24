@@ -2,10 +2,10 @@ package cmd
 
 import (
 	"github.com/matcornic/subify/common/config"
-	"github.com/spf13/cobra"
-	"github.com/spf13/viper"
-	logger "github.com/spf13/jwalterweatherman"
 	"github.com/matcornic/subify/common/utils"
+	"github.com/spf13/cobra"
+	logger "github.com/spf13/jwalterweatherman"
+	"github.com/spf13/viper"
 )
 
 // RootCmd represents the base command when called without any subcommands
@@ -36,10 +36,9 @@ func init() {
 
 }
 
-
 const (
-	SubifyConfigPath = "$HOME"
-	SubifyConfigFile = ".subify"
+	subifyConfigPath = "$HOME"
+	subifyConfigFile = ".subify"
 )
 
 // initConfig reads in config file and ENV variables if set.
@@ -48,14 +47,14 @@ func initConfig() {
 		viper.SetConfigFile(config.ConfigFile)
 	}
 
-	viper.SetConfigName(SubifyConfigFile) // name of config file (without extension)
-	viper.AddConfigPath(SubifyConfigPath)   // adding home directory as first search path
-	viper.AutomaticEnv()           // read in environment variables that match
+	viper.SetConfigName(subifyConfigFile) // name of config file (without extension)
+	viper.AddConfigPath(subifyConfigPath) // adding home directory as first search path
+	viper.AutomaticEnv()                  // read in environment variables that match
 
 	// If a config file is found, read it in.
 	err := viper.ReadInConfig()
 	if err == nil {
-		utils.VerbosePrintln(logger.INFO, "Using config file:" + viper.ConfigFileUsed())
+		utils.VerbosePrintln(logger.INFO, "Using config file:"+viper.ConfigFileUsed())
 	} else {
 		logger.WARN.Println("Could not read config file (", viper.ConfigFileUsed(), "): ", err)
 	}

@@ -3,10 +3,11 @@ package utils
 import (
 	"crypto/md5"
 	"fmt"
-	"github.com/matcornic/subify/common/config"
-	"os"
-	logger "github.com/spf13/jwalterweatherman"
 	"log"
+	"os"
+
+	"github.com/matcornic/subify/common/config"
+	logger "github.com/spf13/jwalterweatherman"
 )
 
 //GetHashOfVideo gets the hash used by SubDb to identify a video. Absolutely needed either to download or upload subtitles.
@@ -46,34 +47,31 @@ func GetHashOfVideo(filename string) string {
 	bufB = append(bufB, bufE...)
 	hash := fmt.Sprintf("%x", md5.Sum(bufB))
 
-	VerbosePrintln(logger.INFO, "Hash of video is " + hash)
+	VerbosePrintln(logger.INFO, "Hash of video is "+hash)
 
 	return hash
 }
 
+// VerbosePrintln only prints log if verbose mode is enabled
 func VerbosePrintln(logger *log.Logger, log string) {
 	if config.Verbose && log != "" {
 		logger.Println(log)
 	}
 }
 
+// Exit exits the application and logs the given message
 func Exit(format string, args ...interface{}) {
 	ExitVerbose("", format, args...)
 }
 
-/*
- * Exit func displays an error message on stderr and exit 1
- * Eventually prints more details about the error if verbose mode is enabled
- */
+// ExitPrintError displays an error message on stderr and exit 1
+// Eventually prints more details about the error if verbose mode is enabled
 func ExitPrintError(err error, format string, args ...interface{}) {
 	ExitVerbose(fmt.Sprint(err), format, args...)
 }
 
-
-/*
- * Exit func displays an error message on stderr and exit 1
- * Eventually prints more details if any verbose details are given and verbose mode is enabled
- */
+// ExitVerbose displays an error message on stderr and exit 1
+// Eventually prints more details if any verbose details are given and verbose mode is enabled
 func ExitVerbose(verboseLog string, format string, args ...interface{}) {
 	VerbosePrintln(logger.ERROR, verboseLog)
 	if !config.Verbose {

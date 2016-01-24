@@ -1,12 +1,13 @@
 package subtitles
 
 import (
-	"github.com/matcornic/subify/common/utils"
-	"github.com/matcornic/subify/subtitles/subdb"
-	"github.com/spf13/viper"
 	"io/ioutil"
 	"path/filepath"
+
+	"github.com/matcornic/subify/common/utils"
+	"github.com/matcornic/subify/subtitles/subdb"
 	logger "github.com/spf13/jwalterweatherman"
+	"github.com/spf13/viper"
 )
 
 // Download the subtitle from the video identified by its path
