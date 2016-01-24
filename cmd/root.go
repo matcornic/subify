@@ -1,11 +1,11 @@
 package cmd
 
 import (
-	"fmt"
 	"github.com/matcornic/subify/common/config"
+	"github.com/matcornic/subify/common/utils"
 	"github.com/spf13/cobra"
+	logger "github.com/spf13/jwalterweatherman"
 	"github.com/spf13/viper"
-	"os"
 )
 
 // RootCmd represents the base command when called without any subcommands
@@ -20,19 +20,26 @@ http://github.com/matcornic/subify`,
 // This is called by main.main(). It only needs to happen once to the rootCmd.
 func Execute() {
 	if err := RootCmd.Execute(); err != nil {
-		fmt.Fprintln(os.Stderr, err)
-		os.Exit(-1)
+		utils.ExitPrintError(err, "An error occurred while running subify")
 	}
 }
 
 func init() {
 	cobra.OnInitialize(initConfig)
-	// Default configuration can be overrided
-	RootCmd.PersistentFlags().StringVar(&config.ConfigFile, "config", "", "Config file (default is $HOME/.subify.json). Build a file like this to change default behaviour")
-	RootCmd.PersistentFlags().BoolVarP(&config.Verbose, "verbose", "v", false, "Print more information while executing")
-	RootCmd.PersistentFlags().BoolVarP(&config.Dev, "dev", "", false, "Instanciate development sandbox instead of production variables")
+	// Default configuration can be overridden
+	RootCmd.PersistentFlags().StringVar(&config.ConfigFile, "config", "",
+		"Config file (default is $HOME/.subify.json). Edit to change default behaviour")
+	RootCmd.PersistentFlags().BoolVarP(&config.Verbose, "verbose", "v", false,
+		"Print more information while executing")
+	RootCmd.PersistentFlags().BoolVarP(&config.Dev, "dev", "", false,
+		"Instanciate development sandbox instead of production variables")
 
 }
+
+const (
+	subifyConfigPath = "$HOME"
+	subifyConfigFile = ".subify"
+)
 
 // initConfig reads in config file and ENV variables if set.
 func initConfig() {
@@ -40,14 +47,15 @@ func initConfig() {
 		viper.SetConfigFile(config.ConfigFile)
 	}
 
-	viper.SetConfigName(".subify") // name of config file (without extension)
-	viper.AddConfigPath("$HOME")   // adding home directory as first search path
-	viper.AutomaticEnv()           // read in environment variables that match
+	viper.SetConfigName(subifyConfigFile) // name of config file (without extension)
+	viper.AddConfigPath(subifyConfigPath) // adding home directory as first search path
+	viper.AutomaticEnv()                  // read in environment variables that match
 
 	// If a config file is found, read it in.
-	if err := viper.ReadInConfig(); err == nil {
-		if config.Verbose {
-			fmt.Println("Using config file:", viper.ConfigFileUsed())
-		}
+	err := viper.ReadInConfig()
+	if err == nil {
+		utils.VerbosePrintln(logger.INFO, "Using config file:"+viper.ConfigFileUsed())
+	} else {
+		logger.WARN.Println("Could not read config file (", viper.ConfigFileUsed(), "): ", err)
 	}
 }
