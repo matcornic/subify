@@ -1,8 +1,8 @@
 package subtitles
 
 import (
-	"github.com/vincentdaniel/subify/common/utils"
-	"github.com/vincentdaniel/subify/subtitles/subdb"
+	"github.com/matcornic/subify/common/utils"
+	"github.com/matcornic/subify/subtitles/subdb"
 	"github.com/spf13/viper"
 	"io/ioutil"
 	"path/filepath"

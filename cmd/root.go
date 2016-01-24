@@ -1,11 +1,11 @@
 package cmd
 
 import (
-	"github.com/vincentdaniel/subify/common/config"
+	"github.com/matcornic/subify/common/config"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 	logger "github.com/spf13/jwalterweatherman"
-	"github.com/vincentdaniel/subify/common/utils"
+	"github.com/matcornic/subify/common/utils"
 )
 
 // RootCmd represents the base command when called without any subcommands
@@ -13,7 +13,7 @@ var RootCmd = &cobra.Command{
 	Use:   "subify",
 	Short: "Tool to handle subtitles for your best TV Shows and movies",
 	Long: `Tool to handle subtitles for your best TV Shows and movies
-http://github.com/vincentdaniel/subify`,
+http://github.com/matcornic/subify`,
 }
 
 // Execute adds all child commands to the root command sets flags appropriately.

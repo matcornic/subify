@@ -3,7 +3,7 @@ package utils
 import (
 	"crypto/md5"
 	"fmt"
-	"github.com/vincentdaniel/subify/common/config"
+	"github.com/matcornic/subify/common/config"
 	"os"
 	logger "github.com/spf13/jwalterweatherman"
 	"log"

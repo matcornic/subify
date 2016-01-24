@@ -1,8 +1,8 @@
 package cmd
 
 import (
-	"github.com/vincentdaniel/subify/common/utils"
-	"github.com/vincentdaniel/subify/subtitles"
+	"github.com/matcornic/subify/common/utils"
+	"github.com/matcornic/subify/subtitles"
 	"github.com/skratchdot/open-golang/open"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"

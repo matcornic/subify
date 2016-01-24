@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"github.com/google/go-querystring/query"
 	"github.com/lafikl/fluent"
-	"github.com/vincentdaniel/subify/common/config"
-	"github.com/vincentdaniel/subify/common/utils"
+	"github.com/matcornic/subify/common/config"
+	"github.com/matcornic/subify/common/utils"
 	"github.com/spf13/viper"
 	"io/ioutil"
 	"time"
@@ -13,7 +13,7 @@ import (
 )
 
 const (
-	userAgent = "SubDB/1.0 (Subify/0.1; http://github.com/vincentdaniel/subify)"
+	userAgent = "SubDB/1.0 (Subify/0.1; http://github.com/matcornic/subify)"
 	devURL    = "http://sandbox.thesubdb.com/"
 	prodURL   = "http://api.thesubdb.com/"
 	defaultLanguage = "en"
