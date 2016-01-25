@@ -4,6 +4,7 @@ import (
 	"errors"
 	"path"
 
+	"github.com/matcornic/subify/subtitles/languages"
 	"github.com/oz/osdb"
 	logger "github.com/spf13/jwalterweatherman"
 )
@@ -12,20 +13,28 @@ import (
 type API struct {
 }
 
+const (
+	userAgent = "Subify 0.1.0"
+)
+
 // Download downloads the OpenSubtitles subtitle from a video
-func (s API) Download(videoPath string, language string) (subtitlePath string, err error) {
+func (s API) Download(videoPath string, language lang.Language) (subtitlePath string, err error) {
 	logger.INFO.Println("Downloading subtitle with OpenSubtitles...")
 
 	c, err := osdb.NewClient()
 	if err != nil {
 		return "", err
 	}
+	c.UserAgent = userAgent
 
 	// Anonymous login
 	if err = c.LogIn("", "", ""); err != nil {
 		return "", err
 	}
-	languages := []string{language}
+	if language.OpenSubtitles == "" {
+		return "", errors.New("Language exists but is not available for OpenSubtitles")
+	}
+	languages := []string{language.OpenSubtitles}
 
 	// Search file
 	subs, err := c.FileSearch(videoPath, languages)
@@ -51,6 +60,6 @@ func (s API) Download(videoPath string, language string) (subtitlePath string, e
 }
 
 // Upload uploads the subtitle to OpenSubtitles, for the given video
-func (s API) Upload(subtitlePath string, langauge string, videoPath string) error {
+func (s API) Upload(subtitlePath string, langauge lang.Language, videoPath string) error {
 	return errors.New("Not yet implemented")
 }

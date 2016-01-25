@@ -64,7 +64,7 @@ Aliases:
 
 Flags:
   -l, --language string   Language of the subtitle (default "en")
-  -o, --open              Once the subtitle is donwloaded, open the video with your default video player (OSX: "open", Windows: "start", Linux/Other: "xdg-open")
+  -o, --open              Once the subtitle is downloaded, open the video with your default video player (OSX: "open", Windows: "start", Linux/Other: "xdg-open")
 
 Global Flags:
       --config string   Config file (default is $HOME/.subify.json). Build a file like this to change default behaviour
@@ -72,7 +72,29 @@ Global Flags:
   -v, --verbose         Print more information while executing
 ```
 
+### Listing command
+
+```
+List available languages
+
+Usage:
+  subify list languages [flags]
+
+Aliases:
+  languages, lang
+
+
+Global Flags:
+      --all             Shows all languages
+      --config string   Config file (default is $HOME/.subify.json). Edit to change default behaviour
+      --dev             Instanciate development sandbox instead of production variables
+  -v, --verbose         Print more information while executing
+```
+
 ## Release Notes
+* **0.2.0** Not released yet
+  * Language checking
+  * OpenSubtitles API implementation
 * **0.1.0** Jan 15, 2016
   * Implement first init
 

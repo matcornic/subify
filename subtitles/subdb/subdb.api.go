@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"path"
 
+	"github.com/matcornic/subify/subtitles/languages"
 	logger "github.com/spf13/jwalterweatherman"
 )
 
@@ -20,7 +21,7 @@ type API struct {
 }
 
 // Download downloads the SubDB subtitle from a video
-func (s API) Download(videoPath string, language string) (subtitlePath string, err error) {
+func (s API) Download(videoPath string, language lang.Language) (subtitlePath string, err error) {
 	logger.INFO.Println("Downloading subtitle with SubDB...")
 	// Get unique hash to identify video
 	hash, err := getHashOfVideo(videoPath)
@@ -28,7 +29,10 @@ func (s API) Download(videoPath string, language string) (subtitlePath string, e
 		return "", err
 	}
 	// Call SubDB API to get subtitle
-	subtitle, err := subtitles(hash, language)
+	if language.SubDB == "" {
+		return "", errors.New("Language exists but is not available for SubDB")
+	}
+	subtitle, err := subtitles(hash, language.SubDB)
 	if err != nil {
 		return "", err
 	}
@@ -45,6 +49,6 @@ func (s API) Download(videoPath string, language string) (subtitlePath string, e
 }
 
 // Upload uploads the subtitle to SubDB, for the given video
-func (s API) Upload(subtitlePath string, langauge string, videoPath string) error {
+func (s API) Upload(subtitlePath string, langauge lang.Language, videoPath string) error {
 	return errors.New("Not yet implemented")
 }
