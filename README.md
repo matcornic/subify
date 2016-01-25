@@ -5,6 +5,7 @@ It is directly able to open the video with your default player, once the subtitl
 Subify uses [SubDB Web API](http://thesubdb.com/) and [OpenSubtitles API](http://trac.opensubtitles.org/projects/opensubtitles/wiki) to get subtitles. It also considers that you use a default player interpreting srt subtitles when the video file name is the same than the srt file (ex: [VLC](http://www.videolan.org/vlc/)).
 
 Subify gets the best match from several APIs in this order
+
 1. SubDB
 2. OpenSubtitles
 
