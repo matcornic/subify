@@ -30,18 +30,38 @@ type Langs []Language
 
 // GetLanguage get the language from an id
 func (l Langs) GetLanguage(id string) (lang *Language) {
-	for _, v := range Languages {
-		if v.ID == id {
+	for _, v := range l {
+		if v.ID == strings.ToLower(id) {
 			return &v
 		}
 		for _, a := range v.Alias {
-			if a == id {
+			if a == strings.ToLower(id) {
 				return &v
 			}
 		}
 	}
 
 	return nil
+}
+
+// GetLanguages gets a list of languages, from a list of ids representing a language
+func (l Langs) GetLanguages(ids []string) Langs {
+	langs := Langs{}
+	for _, id := range ids {
+		lang := Languages.GetLanguage(id)
+		if lang != nil {
+			langs = append(langs, *lang)
+		}
+	}
+	return langs
+}
+
+// GetDescriptions give the descriptions of the languages, as a list
+func (l Langs) GetDescriptions() (descriptions []string) {
+	for _, v := range l {
+		descriptions = append(descriptions, v.Description)
+	}
+	return
 }
 
 // Print prints the languages

@@ -20,7 +20,7 @@ go get -v github.com/matcornic/subify
 On Mac OS, you can also create a Service Automator, in order to [add a "Subify" option in the Finder menu for your videos](https://github.com/matcornic/subify/wiki/Adding-a-Subify-option-in-the-Finder-menu-for-your-videos).
 
 ## Get started
-Note : the binary is usable as is, if you want to run the command from anywhere on your OS, make sure to add Subify home installation to your PATH environment variable
+Note : the binary is usable as is. If you want to run the command from anywhere on your OS, make sure to add Subify home installation to your PATH environment variable
 
 ```shell
 # Download subtitle with default language
@@ -29,6 +29,8 @@ subify dl <path_to_your_video>
 subify dl <path_to_your_video> -o
 # Download subtitle with french language, and open with your default player
 subify dl <path_to_your_video> -o -l fr
+# Download subtitle with french language, if not found spanish, if not found english, then open with your default player
+subify dl <path_to_your_video> -o -l fr,es,en
 ```
 
 ## Documentation
@@ -64,11 +66,11 @@ Aliases:
 
 
 Flags:
-  -l, --language string   Language of the subtitle (default "en")
+  -l, --languages value  Languages of the subtitle separate by a comma. First to match is downloaded (default [en] : English)
   -o, --open              Once the subtitle is downloaded, open the video with your default video player (OSX: "open", Windows: "start", Linux/Other: "xdg-open")
 
 Global Flags:
-      --config string   Config file (default is $HOME/.subify.json). Build a file like this to change default behaviour
+      --config string   Config file (default is $HOME/.subify.json). Build a file like this to change default behavior
       --dev             Instanciate development sandbox instead of production variables
   -v, --verbose         Print more information while executing
 ```
@@ -96,6 +98,7 @@ Global Flags:
 * **0.2.0** Not released yet
   * Language checking
   * OpenSubtitles API implementation
+  * List of favorite languages (Downloads the first to match)
 * **0.1.0** Jan 15, 2016
   * Implement first init
 
@@ -111,13 +114,13 @@ You've developed a cool feature or fixed a bug ?
 6. Create new Pull Request
 
 ## TODO
-1. List of favorite languages (Downloads the first to match)
-2. Auto update command
-3. Upload command to contribute to SubDB/OpenSubtitles database
-4. Vendoring
-5. Doc on default configuration (for example to change the default language for all downloads)
-6. Add Addic7ed API (better quality of translations, but no real API)
-7. Localization/Internationalization
+1. Auto update command
+2. Upload command to contribute to SubDB/OpenSubtitles database
+3. Vendoring
+4. Doc on default configuration (for example to change the default language for all downloads)
+5. Add Addic7ed API (better quality of translations, but no real API)
+6. Localization/Internationalization
+7. Give the opportunity to customize the order of apis searching
 
 ## License
 Subify is released under the Apache 2.0 license. See LICENSE.txt

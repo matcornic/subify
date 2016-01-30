@@ -30,7 +30,7 @@ func ExitPrintError(err error, format string, args ...interface{}) {
 // ExitVerbose displays an error message on stderr and exit 1
 // Eventually prints more details if any verbose details are given and verbose mode is enabled
 func ExitVerbose(verboseLog string, format string, args ...interface{}) {
-	VerbosePrintln(logger.ERROR, verboseLog)
+	logger.ERROR.Println(verboseLog)
 	if !config.Verbose {
 		logger.ERROR.Println("Run subify with --verbose option to get more information about the error")
 	}

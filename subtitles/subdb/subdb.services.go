@@ -10,8 +10,6 @@ import (
 	"github.com/google/go-querystring/query"
 	"github.com/lafikl/fluent"
 	"github.com/matcornic/subify/common/config"
-	"github.com/matcornic/subify/common/utils"
-	logger "github.com/spf13/jwalterweatherman"
 )
 
 // options describes parameters to the SubDB API
@@ -58,8 +56,6 @@ func getHashOfVideo(filename string) (string, error) {
 	bufB = append(bufB, bufE...)
 	hash := fmt.Sprintf("%x", md5.Sum(bufB))
 
-	utils.VerbosePrintln(logger.INFO, "SubDB Hash of video is "+hash)
-
 	return hash, nil
 }
 
@@ -75,7 +71,6 @@ func buildURL(hash string, language string) string {
 	v, _ := query.Values(opt)
 
 	url := baseURL + "?" + v.Encode()
-	utils.VerbosePrintln(logger.INFO, "SubdbURL is : "+url)
 
 	return url
 }
@@ -96,16 +91,14 @@ func subtitles(hash string, language string) ([]byte, error) {
 		return []byte{}, fmt.Errorf("Can't reach the SubDB Web API. Are you connected to the Internet ? %v", err.Error())
 	}
 	if res.StatusCode != 200 {
-		return []byte{}, fmt.Errorf(fmt.Sprintf("Response : %v", res),
-			`Subtitle not found with SubDB Web API. Try with another language (See 'subify dl -h').
-You may contribute to the community by updating their database (see 'subify upload -h')`)
+		return []byte{}, fmt.Errorf(`Subtitle not stored by SubDB`)
 	}
 
 	// Extract the subtitles from the response
 	defer res.Body.Close()
 	content, err := ioutil.ReadAll(res.Body)
 	if err != nil {
-		return []byte{}, fmt.Errorf("Can't read the content of the subtitles dowloaded from Subdb")
+		return []byte{}, fmt.Errorf("The content of the subtitles dowloaded from Subdb is corrupted")
 	}
 
 	return content, nil

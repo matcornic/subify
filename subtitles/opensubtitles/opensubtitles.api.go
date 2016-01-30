@@ -19,8 +19,6 @@ const (
 
 // Download downloads the OpenSubtitles subtitle from a video
 func (s API) Download(videoPath string, language lang.Language) (subtitlePath string, err error) {
-	logger.INFO.Println("Downloading subtitle with OpenSubtitles...")
-
 	c, err := osdb.NewClient()
 	if err != nil {
 		return "", err
@@ -62,4 +60,9 @@ func (s API) Download(videoPath string, language lang.Language) (subtitlePath st
 // Upload uploads the subtitle to OpenSubtitles, for the given video
 func (s API) Upload(subtitlePath string, langauge lang.Language, videoPath string) error {
 	return errors.New("Not yet implemented")
+}
+
+//GetName returns the name of the api
+func (s API) GetName() string {
+	return "OpenSubtitles"
 }

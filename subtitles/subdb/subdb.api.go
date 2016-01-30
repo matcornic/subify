@@ -7,7 +7,6 @@ import (
 	"path"
 
 	"github.com/matcornic/subify/subtitles/languages"
-	logger "github.com/spf13/jwalterweatherman"
 )
 
 const (
@@ -22,7 +21,6 @@ type API struct {
 
 // Download downloads the SubDB subtitle from a video
 func (s API) Download(videoPath string, language lang.Language) (subtitlePath string, err error) {
-	logger.INFO.Println("Downloading subtitle with SubDB...")
 	// Get unique hash to identify video
 	hash, err := getHashOfVideo(videoPath)
 	if err != nil {
@@ -51,4 +49,9 @@ func (s API) Download(videoPath string, language lang.Language) (subtitlePath st
 // Upload uploads the subtitle to SubDB, for the given video
 func (s API) Upload(subtitlePath string, langauge lang.Language, videoPath string) error {
 	return errors.New("Not yet implemented")
+}
+
+//GetName returns the name of the api
+func (s API) GetName() string {
+	return "SubDB"
 }
