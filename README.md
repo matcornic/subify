@@ -109,7 +109,7 @@ Global Flags:
       --config string   Config file (default is $HOME/.subify.json). Edit to change default behaviour
       --dev             Instanciate development sandbox instead of production variables
   -v, --verbose         Print more information while executing
-````
+```
 
 
 ## Release Notes
