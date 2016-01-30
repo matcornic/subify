@@ -23,14 +23,18 @@ On Mac OS, you can also create a Service Automator, in order to [add a "Subify" 
 Note : the binary is usable as is. If you want to run the command from anywhere on your OS, make sure to add Subify home installation to your PATH environment variable
 
 ```shell
-# Download subtitle with default language
+# Download subtitle with default language (English) from default APIs (SubDB, then OpenSubtitles)
 subify dl <path_to_your_video>
-# Download subtitle with default language, and open video with your default player
+# Download subtitle with default language (English), from default APIs (SubDB, then OpenSubtitles), then open video with your default player
 subify dl <path_to_your_video> -o
-# Download subtitle with french language, and open with your default player
+# Download subtitle with french language, from default APIs (SubDB, then OpenSubtitles), and open with your default player
 subify dl <path_to_your_video> -o -l fr
-# Download subtitle with french language, if not found spanish, if not found english, then open with your default player
-subify dl <path_to_your_video> -o -l fr,es,en
+# Download subtitle with french language, if not found spanish, if not found english, from default APIs (SubDB, then OpenSubtitles)
+subify dl <path_to_your_video> -l fr,es,en
+# Download subtitle with default language, by searching first in OpenSubtitles, then in SubDB
+subify dl <path_to_your_video> -a os,subdb
+# Download subtitle with default language, by searching only in OpenSubtitles
+subify dl <path_to_your_video> -a OpenSubtitles
 ```
 
 ## Documentation
@@ -67,11 +71,12 @@ Aliases:
 
 
 Flags:
-  -l, --languages value  Languages of the subtitle separate by a comma. First to match is downloaded (default [en] : English)
+  -a, --apis value        Overwrite default searching APIs behavior, hence the subtitles are downloaded. Available apis at 'subify list apis' (default [SubDB,OpenSubtitles])
+  -l, --languages value   Languages of the subtitle separate by a comma (First to match is downloaded). Available languages at 'subify list languages' (default [en])
   -o, --open              Once the subtitle is downloaded, open the video with your default video player (OSX: "open", Windows: "start", Linux/Other: "xdg-open")
 
 Global Flags:
-      --config string   Config file (default is $HOME/.subify.json). Build a file like this to change default behavior
+      --config string   Config file (default is $HOME/.subify.json). Edit to change default behavior
       --dev             Instanciate development sandbox instead of production variables
   -v, --verbose         Print more information while executing
 ```
@@ -94,6 +99,18 @@ Global Flags:
       --dev             Instanciate development sandbox instead of production variables
   -v, --verbose         Print more information while executing
 ```
+```
+List the available apis used by Subify
+
+Usage:
+  subify list apis [flags]
+
+Global Flags:
+      --config string   Config file (default is $HOME/.subify.json). Edit to change default behaviour
+      --dev             Instanciate development sandbox instead of production variables
+  -v, --verbose         Print more information while executing
+````
+
 
 ## Release Notes
 * **0.2.0** Not released yet
@@ -101,6 +118,8 @@ Global Flags:
   * OpenSubtitles API implementation
   * List of favorite languages (Downloads the first to match)
   * Vendoring (with glide)
+  * List of available apis
+  * Usage of APIs is customizable (can order Subdb search before OpenSubtitles for ex)
 * **0.1.0** Jan 15, 2016
   * Implement first init
 
@@ -124,7 +143,6 @@ Subify uses vendoring with Glide to manage dependencies. Don't forget to set `GO
 3. Doc on default configuration (for example to change the default language for all downloads)
 4. Add Addic7ed API (better quality of translations, but no real API)
 5. Localization/Internationalization
-6. Give the opportunity to customize the order of apis searching
 
 ## License
 Subify is released under the Apache 2.0 license. See LICENSE.txt

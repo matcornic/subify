@@ -20,5 +20,5 @@ var languagesCmd = &cobra.Command{
 
 func init() {
 	listCmd.AddCommand(languagesCmd)
-	listCmd.PersistentFlags().BoolVar(&all, "all", false, "Shows all languages")
+	languagesCmd.PersistentFlags().BoolVar(&all, "all", false, "Shows all languages")
 }

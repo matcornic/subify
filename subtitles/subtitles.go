@@ -6,27 +6,23 @@ import (
 	"strings"
 
 	"github.com/matcornic/subify/subtitles/languages"
-	"github.com/matcornic/subify/subtitles/opensubtitles"
-	"github.com/matcornic/subify/subtitles/subdb"
 	logger "github.com/spf13/jwalterweatherman"
 )
 
-// Client defines the interface to get subtitles from API
-type Client interface {
-	Download(videoPath string, language lang.Language) (subtitlePath string, err error)
-	Upload(subtitlePath string, language lang.Language, videoPath string) error
-	GetName() string
-}
-
 // Download the subtitle from the video identified by its path
-func Download(videoPath string, languages []string) error {
+func Download(videoPath string, apiAliases []string, languages []string) error {
 	// APIs to download subtitles.
-	apis := []Client{
-		subdb.API{},
-		opensubtitles.API{},
-	}
 	var subtitlePath string
 	var err error
+
+	// Gets APIs
+	a := InitAPIs(apiAliases)
+	if len(a) == 0 {
+		a = DefaultAPIs
+		logger.WARN.Println("No API has been recognized by Subify. Using default:", DefaultAPIs)
+	} else if len(apiAliases) != len(a) {
+		logger.WARN.Println("Some languages are not recognized. Given:", apiAliases, "Found:", a)
+	}
 
 	// Check languages
 	l := lang.Languages.GetLanguages(languages)
@@ -43,7 +39,7 @@ browselang:
 	for i, lang := range l {
 		// Run through different APIs to get the subtitle. Stops when found
 		logger.INFO.Println("===> ("+strconv.Itoa(i+1)+") Searching subtitles for", lang.Description, "language")
-		for j, api := range apis {
+		for j, api := range a {
 			logger.INFO.Println("=> (" + strconv.Itoa(i+1) + "." + strconv.Itoa(j+1) + ") Downloading subtitle with " + api.GetName() + "...")
 			subtitlePath, err = api.Download(videoPath, lang)
 			if err == nil {
@@ -52,7 +48,7 @@ browselang:
 			} else {
 				logger.INFO.Println("Subtitle not found because :", err.Error())
 			}
-			if (j + 1) < len(apis) {
+			if (j + 1) < len(a) {
 				logger.INFO.Println("Trying with another API...")
 			}
 		}

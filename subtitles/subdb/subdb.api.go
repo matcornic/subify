@@ -17,6 +17,16 @@ const (
 
 // API entry point
 type API struct {
+	Name    string
+	Aliases []string
+}
+
+// New creates a new API for OpenSubtitles
+func New() API {
+	return API{
+		Name:    "SubDB",
+		Aliases: []string{"subdb"},
+	}
 }
 
 // Download downloads the SubDB subtitle from a video
@@ -51,7 +61,12 @@ func (s API) Upload(subtitlePath string, langauge lang.Language, videoPath strin
 	return errors.New("Not yet implemented")
 }
 
-//GetName returns the name of the api
+// GetName returns the name of the api
 func (s API) GetName() string {
-	return "SubDB"
+	return s.Name
+}
+
+// GetAliases returns aliases to identify this API
+func (s API) GetAliases() []string {
+	return s.Aliases
 }

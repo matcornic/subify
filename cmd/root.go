@@ -32,7 +32,7 @@ func init() {
 	cobra.OnInitialize(initConfig)
 	// Default configuration can be overridden
 	RootCmd.PersistentFlags().StringVar(&config.ConfigFile, "config", "",
-		"Config file (default is $HOME/.subify.json). Edit to change default behaviour")
+		"Config file (default is $HOME/.subify.json). Edit to change default behavior")
 	RootCmd.PersistentFlags().BoolVarP(&config.Verbose, "verbose", "v", false,
 		"Print more information while executing")
 	RootCmd.PersistentFlags().BoolVarP(&config.Dev, "dev", "", false,

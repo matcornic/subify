@@ -8,6 +8,7 @@ import (
 	logger "github.com/spf13/jwalterweatherman"
 )
 
+var apis []string
 var languages []string
 var openVideo bool
 
@@ -25,7 +26,7 @@ Give the path of your video as first parameter and let's go !`,
 		videoPath := args[0]
 		utils.VerbosePrintln(logger.INFO, "Given video file is "+videoPath)
 
-		err := subtitles.Download(videoPath, languages)
+		err := subtitles.Download(videoPath, apis, languages)
 		if err != nil {
 			utils.ExitPrintError(err, "Sadly, we could not download any subtitle for you. Try another time or contribute to the apis. See 'subify upload -h'")
 		}
@@ -37,9 +38,10 @@ Give the path of your video as first parameter and let's go !`,
 }
 
 func init() {
-	dlCmd.Flags().StringSliceVarP(&languages, "languages", "l", []string{"en"}, "Languages of the subtitle separate by a comma. First to match is downloaded")
+	dlCmd.Flags().StringSliceVarP(&languages, "languages", "l", []string{"en"}, "Languages of the subtitle separate by a comma (First to match is downloaded). Available languages at 'subify list languages'")
+	dlCmd.Flags().StringSliceVarP(&apis, "apis", "a", []string{"SubDB", "OpenSubtitles"}, "Overwrite default searching APIs behavior, hence the subtitles are downloaded. Available APIs at 'subify list apis'")
 	dlCmd.Flags().BoolVarP(&openVideo, "open", "o", false,
-		"Once the subtitle is donwloaded, open the video with your default video player"+
+		"Once the subtitle is downloaded, open the video with your default video player"+
 			` (OSX: "open", Windows: "start", Linux/Other: "xdg-open")`)
 	RootCmd.AddCommand(dlCmd)
 }
