@@ -3,6 +3,7 @@ package utils
 import (
 	"fmt"
 	"log"
+	"os"
 
 	"github.com/matcornic/subify/common/config"
 	logger "github.com/spf13/jwalterweatherman"
@@ -34,4 +35,5 @@ func ExitVerbose(verboseLog string, format string, args ...interface{}) {
 		logger.ERROR.Println("Run subify with --verbose option to get more information about the error")
 	}
 	logger.FATAL.Printf(format)
+	os.Exit(-1)
 }
