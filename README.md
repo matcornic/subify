@@ -100,6 +100,7 @@ Global Flags:
   * Language checking
   * OpenSubtitles API implementation
   * List of favorite languages (Downloads the first to match)
+  * Vendoring (with glide)
 * **0.1.0** Jan 15, 2016
   * Implement first init
 
@@ -114,14 +115,16 @@ You've developed a cool feature or fixed a bug ?
 5. Push to the branch (git push origin my-new-feature)
 6. Create new Pull Request
 
+Note :
+Subify uses vendoring with Glide to manage dependencies. Don't forget to set `GO15VENDOREXPERIMENT=1` in your environment variables if you use Go 1.5
+
 ## TODO
 1. Auto update command
 2. Upload command to contribute to SubDB/OpenSubtitles database
-3. Vendoring
-4. Doc on default configuration (for example to change the default language for all downloads)
-5. Add Addic7ed API (better quality of translations, but no real API)
-6. Localization/Internationalization
-7. Give the opportunity to customize the order of apis searching
+3. Doc on default configuration (for example to change the default language for all downloads)
+4. Add Addic7ed API (better quality of translations, but no real API)
+5. Localization/Internationalization
+6. Give the opportunity to customize the order of apis searching
 
 ## License
 Subify is released under the Apache 2.0 license. See LICENSE.txt
