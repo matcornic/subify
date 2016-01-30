@@ -37,17 +37,18 @@ subify dl <path_to_your_video> -o -l fr,es,en
 ### Global usage
 ```
 Tool to handle subtitles for your best TV Shows and movies
+http://github.com/matcornic/subify
 
 Usage:
   subify [command]
 
 Available Commands:
   dl          Download the subtitles for your video - 'subify dl --help'
+  list        List information about something (ex: languages)
 
 Flags:
-      --config string   Config file (default is $HOME/.subify.json). Build a file like this to change default behaviour
+      --config string   Config file (default is $HOME/.subify.json). Edit to change default behaviour
       --dev             Instanciate development sandbox instead of production variables
-  -h, --help            help for subify
   -v, --verbose         Print more information while executing
 
 Use "subify [command] --help" for more information about a command.
