@@ -3,12 +3,21 @@
 		"default",
 		"publish-github"
 	],
-	"PackageVersion": "0.1.0",
+	"TasksExclude": [
+		"go-test",
+		"go-fmt",
+		"go-vet"
+	],
+	"BuildConstraints": "linux darwin windows",
+	"PackageVersion": "0.1.1",
 	"TaskSettings": {
 		"publish-github": {
 			"owner": "matcornic",
 			"repository": "subify"
-		}
+		},
+		"go-test": {
+			 "dir": "."
+	 }
 	},
 	"ConfigVersion": "0.9"
 }
