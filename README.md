@@ -129,7 +129,7 @@ apis = "SubDB,OpenSubtitles" # Searching from these sites
 ```
 
 ## Release Notes
-* **0.2.0** Not released yet
+* **0.1.1** Jan 31, 2016
   * Language checking
   * OpenSubtitles API implementation
   * List of favorite languages (Downloads the first to match)
