@@ -31,11 +31,11 @@ type Langs []Language
 // GetLanguage get the language from an id
 func (l Langs) GetLanguage(id string) (lang *Language) {
 	for _, v := range l {
-		if v.ID == strings.ToLower(id) {
+		if strings.ToLower(strings.TrimSpace(v.ID)) == strings.ToLower(strings.TrimSpace(id)) {
 			return &v
 		}
 		for _, a := range v.Alias {
-			if a == strings.ToLower(id) {
+			if strings.ToLower(strings.TrimSpace(a)) == strings.ToLower(strings.TrimSpace(id)) {
 				return &v
 			}
 		}
