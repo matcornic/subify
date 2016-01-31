@@ -62,7 +62,10 @@ func getHashOfVideo(filename string) (string, error) {
 func buildURL(hash string, language string) string {
 	baseURL := prodURL
 	if config.Dev {
+		fmt.Println("Dev mode")
 		baseURL = devURL
+	} else {
+		fmt.Println("Prod mode")
 	}
 	opt := options{
 		Action:   "download",

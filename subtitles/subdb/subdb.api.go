@@ -11,7 +11,7 @@ import (
 
 const (
 	userAgent = "SubDB/1.0 (Subify/0.1; http://github.com/matcornic/subify)"
-	devURL    = "http://sandbox.thesubd.com/"
+	devURL    = "http://sandbox.thesubdb.com/"
 	prodURL   = "http://api.thesubdb.com/"
 )
 

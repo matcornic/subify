@@ -2,9 +2,9 @@
 Subify is a tool to download subtitles for your favorite TV shows and movies.
 It is directly able to open the video with your default player, once the subtitle is downloaded.
 
-Subify uses [SubDB Web API](http://thesubdb.com/) and [OpenSubtitles API](http://trac.opensubtitles.org/projects/opensubtitles/wiki) to get subtitles. It also considers that you use a default player interpreting srt subtitles when the video file name is the same than the srt file (ex: [VLC](http://www.videolan.org/vlc/)).
+Subify combines [SubDB Web API](http://thesubdb.com/) and [OpenSubtitles API](http://trac.opensubtitles.org/projects/opensubtitles/wiki) to get the best subtitles fr your video. It also considers that you use a default player interpreting srt subtitles when the video file name is the same than the srt file (ex: [VLC](http://www.videolan.org/vlc/)).
 
-Subify gets the best match from several APIs in this order
+Subify gets the best match from several APIs in this order. This default behavior can easily be changed. See the documentation below
 
 1. SubDB
 2. OpenSubtitles
@@ -14,7 +14,7 @@ Download the [last version of Subify](https://github.com/matcornic/subify/releas
 
 If you use Golang, you can get Subify and its binary directly with :
 ```shell
-go get -v github.com/matcornic/subify
+go get -u github.com/matcornic/subify
 ```
 
 On Mac OS, you can also create a Service Automator, in order to [add a "Subify" option in the Finder menu for your videos](https://github.com/matcornic/subify/wiki/Adding-a-Subify-option-in-the-Finder-menu-for-your-videos).
@@ -51,7 +51,7 @@ Available Commands:
   list        List information about something (ex: languages)
 
 Flags:
-      --config string   Config file (default is $HOME/.subify.json). Edit to change default behaviour
+      --config string   Config file (default is $HOME/.subify.|json|yaml|toml). Edit to change default behaviour
       --dev             Instanciate development sandbox instead of production variables
   -v, --verbose         Print more information while executing
 
@@ -76,7 +76,7 @@ Flags:
   -o, --open              Once the subtitle is downloaded, open the video with your default video player (OSX: "open", Windows: "start", Linux/Other: "xdg-open")
 
 Global Flags:
-      --config string   Config file (default is $HOME/.subify.json). Edit to change default behavior
+      --config string   Config file (default is $HOME/.subify.|json|yaml|toml). Edit to change default behavior
       --dev             Instanciate development sandbox instead of production variables
   -v, --verbose         Print more information while executing
 ```
@@ -95,7 +95,7 @@ Aliases:
 
 Global Flags:
       --all             Shows all languages
-      --config string   Config file (default is $HOME/.subify.json). Edit to change default behaviour
+      --config string   Config file (default is $HOME/.subify.|json|yaml|toml). Edit to change default behaviour
       --dev             Instanciate development sandbox instead of production variables
   -v, --verbose         Print more information while executing
 ```
@@ -106,11 +106,27 @@ Usage:
   subify list apis [flags]
 
 Global Flags:
-      --config string   Config file (default is $HOME/.subify.json). Edit to change default behaviour
+      --config string   Config file (default is $HOME/.subify.|json|yaml|toml). Edit to change default behaviour
       --dev             Instanciate development sandbox instead of production variables
   -v, --verbose         Print more information while executing
 ```
 
+## Overriding default configuration
+
+Default configuration can be overridden. Instead of passing the same parameters again and again to the command, you can write a `JSON/YAML/TOML` in your home folder (`$HOME/.subify.|json|yaml|toml`). Here is an example with a `.subify.toml` file :
+
+```toml
+
+# Root is for all commands
+[root]
+verbose = false # Turn on to print more information by default
+dev = false # Don't turn on, just for development purpose
+
+# download for the download/dl command
+[download]
+languages = "en" # Searching for theses languages. Can be a list like : "fr,es,en"
+apis = "SubDB,OpenSubtitles" # Searching from these sites
+```
 
 ## Release Notes
 * **0.2.0** Not released yet
@@ -120,6 +136,7 @@ Global Flags:
   * Vendoring (with glide)
   * List of available apis
   * Usage of APIs is customizable (can order Subdb search before OpenSubtitles for ex)
+  * customizable default configuration with a conf file (for example to change the default language for all downloads)
 * **0.1.0** Jan 15, 2016
   * Implement first init
 
@@ -140,9 +157,12 @@ Subify uses vendoring with Glide to manage dependencies. Don't forget to set `GO
 ## TODO
 1. Auto update command
 2. Upload command to contribute to SubDB/OpenSubtitles database
-3. Doc on default configuration (for example to change the default language for all downloads)
 4. Add Addic7ed API (better quality of translations, but no real API)
 5. Localization/Internationalization
+6. Proper logging (stdout + stderr + verbose + debug)
+7. Wercker/Travis
+8. Generate GoDoc
+9. Extract SubDB API in separate projet
 
 ## License
 Subify is released under the Apache 2.0 license. See LICENSE.txt

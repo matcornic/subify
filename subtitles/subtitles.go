@@ -61,7 +61,7 @@ browselang:
 	}
 
 	if err != nil {
-		return fmt.Errorf("No %v subtitle found, even after searching in all APIs for all given languages", strings.Join(l.GetDescriptions(), ", nor "))
+		return fmt.Errorf("No %v subtitle found, even after searching in all APIs (%v)", strings.Join(l.GetDescriptions(), ", nor "), a.String())
 	}
 
 	return nil

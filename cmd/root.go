@@ -1,10 +1,11 @@
 package cmd
 
 import (
+	"fmt"
+
 	"github.com/matcornic/subify/common/config"
 	"github.com/matcornic/subify/common/utils"
 	"github.com/spf13/cobra"
-	logger "github.com/spf13/jwalterweatherman"
 	"github.com/spf13/viper"
 )
 
@@ -15,7 +16,9 @@ var RootCmd = &cobra.Command{
 	Long: `Tool to handle subtitles for your best TV Shows and movies
 http://github.com/matcornic/subify`,
 	PersistentPreRun: func(cmd *cobra.Command, args []string) {
-		// Assertions
+		// Overwrite conf from config files
+		config.Dev = viper.GetBool("root.dev")
+		config.Verbose = viper.GetBool("root.verbose")
 		utils.InitLoggingConf()
 	},
 }
@@ -32,12 +35,13 @@ func init() {
 	cobra.OnInitialize(initConfig)
 	// Default configuration can be overridden
 	RootCmd.PersistentFlags().StringVar(&config.ConfigFile, "config", "",
-		"Config file (default is $HOME/.subify.json). Edit to change default behavior")
+		"Config file (default is $HOME/.subify.yaml|json|toml). Edit to change default behavior")
 	RootCmd.PersistentFlags().BoolVarP(&config.Verbose, "verbose", "v", false,
 		"Print more information while executing")
 	RootCmd.PersistentFlags().BoolVarP(&config.Dev, "dev", "", false,
 		"Instanciate development sandbox instead of production variables")
-
+	viper.BindPFlag("root.dev", RootCmd.PersistentFlags().Lookup("dev"))
+	viper.BindPFlag("root.verbose", RootCmd.PersistentFlags().Lookup("verbose"))
 }
 
 const (
@@ -53,13 +57,12 @@ func initConfig() {
 
 	viper.SetConfigName(subifyConfigFile) // name of config file (without extension)
 	viper.AddConfigPath(subifyConfigPath) // adding home directory as first search path
-	viper.AutomaticEnv()                  // read in environment variables that match
 
 	// If a config file is found, read it in.
 	err := viper.ReadInConfig()
 	if err == nil {
-		utils.VerbosePrintln(logger.INFO, "Using config file:"+viper.ConfigFileUsed())
+		fmt.Println("Using config file:" + viper.ConfigFileUsed())
 	} else {
-		logger.WARN.Println("Could not read config file (", viper.ConfigFileUsed(), "): ", err)
+		fmt.Println("Cant read config file:" + viper.ConfigFileUsed())
 	}
 }
