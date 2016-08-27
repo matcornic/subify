@@ -2,7 +2,7 @@
 Subify is a tool to download subtitles for your favorite TV shows and movies.
 It is directly able to open the video with your default player, once the subtitle is downloaded.
 
-Subify combines [SubDB Web API](http://thesubdb.com/) and [OpenSubtitles API](http://trac.opensubtitles.org/projects/opensubtitles/wiki) to get the best subtitles fr your video. It also considers that you use a default player interpreting srt subtitles when the video file name is the same than the srt file (ex: [VLC](http://www.videolan.org/vlc/)).
+Subify combines [SubDB Web API](http://thesubdb.com/) and [OpenSubtitles API](http://trac.opensubtitles.org/projects/opensubtitles/wiki) to get the best subtitles for your video. It also considers that you use a default player interpreting srt subtitles when the video file name is the same than the srt file (ex: [VLC](http://www.videolan.org/vlc/)).
 
 Subify gets the best match from several APIs in this order. This default behavior can easily be changed. See the documentation below
 
@@ -10,7 +10,7 @@ Subify gets the best match from several APIs in this order. This default behavio
 2. OpenSubtitles
 
 ## Installing
-Download the [last version of Subify](https://github.com/matcornic/subify/releases), and that's it. No need to install something else. Works on Linux, Mac OS (Darwin) and Windows
+Download the [latest version of Subify](https://github.com/matcornic/subify/releases), and that's it. No need to install something else. Works on Linux, Mac OS (Darwin) and Windows
 
 If you use Golang, you can get Subify and its binary directly with :
 ```shell
