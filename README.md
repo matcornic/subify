@@ -11,7 +11,7 @@ Subify gets the best match from several APIs in this order. This default behavio
 3. Addic7ed
 
 ## Installing
-Download the [last version of Subify](https://github.com/matcornic/subify/releases), and that's it. No need to install something else. Works on Linux, Mac OS (Darwin) and Windows
+Download the [latest version of Subify](https://github.com/matcornic/subify/releases), and that's it. No need to install something else. Works on Linux, Mac OS (Darwin) and Windows
 
 If you use Golang, you can get Subify and its binary directly with :
 ```shell
