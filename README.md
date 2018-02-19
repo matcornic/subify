@@ -18,19 +18,19 @@ If you use Golang, you can get Subify and its binary directly with :
 go get -u github.com/matcornic/subify
 ```
 
-On Mac OS, you can also create a Service Automator, in order to [add a "Subify" option in the Finder menu for your videos](https://github.com/matcornic/subify/wiki/Adding-a-Subify-option-in-the-Finder-menu-for-your-videos).
+> On **Mac OS**, bring the power of Service Automator to [add a "Subify" option in the Finder menu for your videos](https://github.com/matcornic/subify/wiki/Adding-a-Subify-option-in-the-Finder-menu-for-your-videos).
 
 ## Get started
 Note : the binary is usable as is. If you want to run the command from anywhere on your OS, make sure to add Subify home installation to your PATH environment variable
 
 ```shell
-# Download subtitle with default language (English) from default APIs (SubDB, then OpenSubtitles)
+# Download subtitle with default language (English) from default APIs (SubDB, then OpenSubtitles, then Addic7ed)
 subify dl <path_to_your_video>
-# Download subtitle with default language (English), from default APIs (SubDB, then OpenSubtitles), then open video with your default player
+# Download subtitle with default language (English), from default APIs (SubDB, then OpenSubtitles, then Addic7ed), then open video with your default player
 subify dl <path_to_your_video> -o
-# Download subtitle with french language, from default APIs (SubDB, then OpenSubtitles), and open with your default player
+# Download subtitle with french language, from default APIs (SubDB, then OpenSubtitles, then Addic7ed), and open with your default player
 subify dl <path_to_your_video> -o -l fr
-# Download subtitle with french language, if not found spanish, if not found english, from default APIs (SubDB, then OpenSubtitles)
+# Download subtitle with french language, if not found spanish, if not found english, from default APIs (SubDB, then OpenSubtitles, then Addic7ed)
 subify dl <path_to_your_video> -l fr,es,en
 # Download subtitle with default language, by searching first in OpenSubtitles, then in SubDB
 subify dl <path_to_your_video> -a os,subdb
@@ -72,7 +72,7 @@ Aliases:
 
 
 Flags:
-  -a, --apis value        Overwrite default searching APIs behavior, hence the subtitles are downloaded. Available apis at 'subify list apis' (default [SubDB,OpenSubtitles])
+  -a, --apis value        Overwrite default searching APIs behavior, hence the subtitles are downloaded. Available apis at 'subify list apis' (default [SubDB,OpenSubtitles,Addic7ed])
   -l, --languages value   Languages of the subtitle separate by a comma (First to match is downloaded). Available languages at 'subify list languages' (default [en])
   -o, --open              Once the subtitle is downloaded, open the video with your default video player (OSX: "open", Windows: "start", Linux/Other: "xdg-open")
 
@@ -132,6 +132,8 @@ apis = "SubDB,OpenSubtitles,Addic7ed" # Searching from these sites
 ## Release Notes
 * **0.2.0** Feb 19, 2018
   * Addic7ed implementation
+  * Refactoring
+  * Vendoring with dep
 * **0.1.1** Jan 31, 2016
   * Language checking
   * OpenSubtitles API implementation
