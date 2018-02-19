@@ -2,12 +2,75 @@ package subtitles
 
 import (
 	"fmt"
+	"os"
 	"strconv"
 	"strings"
 
-	"github.com/matcornic/subify/subtitles/languages"
+	"github.com/olekukonko/tablewriter"
 	logger "github.com/spf13/jwalterweatherman"
 )
+
+// Client defines the interface to get subtitles from API
+type Client interface {
+	Download(videoPath string, language Language) (subtitlePath string, err error)
+	Upload(subtitlePath string, language Language, videoPath string) error
+	GetName() string
+	GetAliases() []string
+}
+
+// Clients is a slice of Client
+type Clients []Client
+
+// DefaultAPIs represents the available APIs
+// Is also used as the default
+var DefaultAPIs = Clients{
+	SubDB(),
+	OpenSubtitles(),
+	Addic7ed(),
+}
+
+// InitAPIs sets the order of APIs search from apiAliases
+// If alias does not exists, it is not included
+func InitAPIs(apiAliases []string) (apis Clients) {
+	for _, alias := range apiAliases {
+		for _, availableAPI := range DefaultAPIs {
+			for _, availableAliases := range availableAPI.GetAliases() {
+				if strings.ToLower(strings.TrimSpace(alias)) == strings.ToLower(strings.TrimSpace(availableAliases)) {
+					apis = append(apis, availableAPI)
+				}
+			}
+		}
+	}
+	return
+}
+
+// Print prints the clients as nice table
+func (c Clients) Print() {
+	table := tablewriter.NewWriter(os.Stdout)
+	table.SetHeader([]string{"Name", "Aliases"})
+	for _, l := range c {
+		values := []string{
+			l.GetName(),                        // Name
+			strings.Join(l.GetAliases(), ", "), // Aliases
+		}
+		table.Append(values)
+	}
+	table.SetAutoWrapText(false)
+	table.SetColWidth(50)
+	table.SetRowLine(true)
+	table.Render() // Send output
+}
+
+//String prints a nice representation of clients
+func (c Clients) String() (s string) {
+	for i, v := range c {
+		s = s + v.GetName()
+		if (i + 1) < len(c) {
+			s = s + ", "
+		}
+	}
+	return
+}
 
 // Download the subtitle from the video identified by its path
 func Download(videoPath string, apiAliases []string, languages []string) error {
@@ -25,10 +88,10 @@ func Download(videoPath string, apiAliases []string, languages []string) error {
 	}
 
 	// Check languages
-	l := lang.Languages.GetLanguages(languages)
+	l := Languages.GetLanguages(languages)
 	if len(l) == 0 {
 		logger.ERROR.Println("Languages", languages, "are not available. Pick one ore more from the table below :")
-		lang.Languages.Print(false)
+		Languages.Print(false)
 		return fmt.Errorf("No languages is available for given languages : %v", languages)
 	} else if len(languages) != len(l) {
 		logger.WARN.Println("Some languages are not recognized. Given:", languages, "Found:", l.GetDescriptions())

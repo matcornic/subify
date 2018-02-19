@@ -42,7 +42,7 @@ Give the path of your video as first parameter and let's go !`,
 
 func init() {
 	dlCmd.Flags().StringP("languages", "l", "en", "Languages of the subtitle separate by a comma (First to match is downloaded). Available languages at 'subify list languages'")
-	dlCmd.Flags().StringP("apis", "a", "SubDB,OpenSubtitles", "Overwrite default searching APIs behavior, hence the subtitles are downloaded. Available APIs at 'subify list apis'")
+	dlCmd.Flags().StringP("apis", "a", "SubDB,OpenSubtitles,Addic7ed", "Overwrite default searching APIs behavior, hence the subtitles are downloaded. Available APIs at 'subify list apis'")
 	dlCmd.Flags().BoolVarP(&openVideo, "open", "o", false,
 		"Once the subtitle is downloaded, open the video with your default video player"+
 			` (OSX: "open", Windows: "start", Linux/Other: "xdg-open")`)

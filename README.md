@@ -2,12 +2,13 @@
 Subify is a tool to download subtitles for your favorite TV shows and movies.
 It is directly able to open the video with your default player, once the subtitle is downloaded.
 
-Subify combines [SubDB Web API](http://thesubdb.com/) and [OpenSubtitles API](http://trac.opensubtitles.org/projects/opensubtitles/wiki) to get the best subtitles fr your video. It also considers that you use a default player interpreting srt subtitles when the video file name is the same than the srt file (ex: [VLC](http://www.videolan.org/vlc/)).
+Subify combines [SubDB Web API](http://thesubdb.com/), [OpenSubtitles API](http://trac.opensubtitles.org/projects/opensubtitles/wiki) and [Addic7ed](http://www.addic7ed.com/) to get the best subtitles for your video. It also considers that you use a default player interpreting srt subtitles when the video file name is the same than the srt file (ex: [VLC](http://www.videolan.org/vlc/)).
 
 Subify gets the best match from several APIs in this order. This default behavior can easily be changed. See the documentation below
 
 1. SubDB
 2. OpenSubtitles
+3. Addic7ed
 
 ## Installing
 Download the [last version of Subify](https://github.com/matcornic/subify/releases), and that's it. No need to install something else. Works on Linux, Mac OS (Darwin) and Windows
@@ -125,10 +126,12 @@ dev = false # Don't turn on, just for development purpose
 # download for the download/dl command
 [download]
 languages = "en" # Searching for theses languages. Can be a list like : "fr,es,en"
-apis = "SubDB,OpenSubtitles" # Searching from these sites
+apis = "SubDB,OpenSubtitles,Addic7ed" # Searching from these sites
 ```
 
 ## Release Notes
+* **0.2.0** Feb 19, 2018
+  * Addic7ed implementation
 * **0.1.1** Jan 31, 2016
   * Language checking
   * OpenSubtitles API implementation
@@ -140,29 +143,6 @@ apis = "SubDB,OpenSubtitles" # Searching from these sites
 * **0.1.0** Jan 15, 2016
   * Implement first init
 
-## Contributing
-
-You've developed a cool feature or fixed a bug ?
-
-1. Fork the repo
-2. Create an issue  
-3. Create your feature branch (git checkout -b my-new-feature)
-4. Commit your changes (git commit -am 'Add some feature')
-5. Push to the branch (git push origin my-new-feature)
-6. Create new Pull Request
-
-Note :
-Subify uses vendoring with Glide to manage dependencies. Don't forget to set `GO15VENDOREXPERIMENT=1` in your environment variables if you use Go 1.5
-
-## TODO
-1. Auto update command
-2. Upload command to contribute to SubDB/OpenSubtitles database
-4. Add Addic7ed API (better quality of translations, but no real API)
-5. Localization/Internationalization
-6. Proper logging (stdout + stderr + verbose + debug)
-7. Wercker/Travis
-8. Generate GoDoc
-9. Extract SubDB API in separate projet
-
 ## License
+
 Subify is released under the Apache 2.0 license. See LICENSE.txt

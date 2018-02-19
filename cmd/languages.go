@@ -1,7 +1,7 @@
 package cmd
 
 import (
-	"github.com/matcornic/subify/subtitles/languages"
+	"github.com/matcornic/subify/subtitles"
 	"github.com/spf13/cobra"
 )
 
@@ -14,7 +14,7 @@ var languagesCmd = &cobra.Command{
 	Short:   "List available languages",
 	Long:    `List available languages`,
 	Run: func(cmd *cobra.Command, args []string) {
-		lang.Languages.Print(all)
+		subtitles.Languages.Print(all)
 	},
 }
 

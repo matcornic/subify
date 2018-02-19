@@ -1,16 +1,94 @@
-package subdb
+package subtitles
 
 import (
 	"crypto/md5"
+	"errors"
 	"fmt"
 	"io/ioutil"
 	"os"
+	"path"
 	"time"
 
 	"github.com/google/go-querystring/query"
 	"github.com/lafikl/fluent"
 	"github.com/matcornic/subify/common/config"
 )
+
+const (
+	subDbUserAgent = "SubDB/1.0 (Subify/0.1; http://github.com/matcornic/subify)"
+	subdbDevURL    = "http://sandbox.thesubdb.com/"
+	subdbProdURL   = "http://api.thesubdb.com/"
+)
+
+var subdbLangs = map[string]string{
+	"dut": "nl",
+	"eng": "en",
+	"fre": "fr",
+	"ita": "it",
+	"pol": "pl",
+	"spa": "es",
+	"swe": "sv",
+	"tur": "tr",
+	"rum": "ro",
+	"pob": "pt",
+}
+
+// API entry point
+type SubDBAPI struct {
+	Name    string
+	Aliases []string
+}
+
+// New creates a new API for OpenSubtitles
+func SubDB() SubDBAPI {
+	return SubDBAPI{
+		Name:    "SubDB",
+		Aliases: []string{"subdb"},
+	}
+}
+
+// Download downloads the SubDB subtitle from a video
+func (s SubDBAPI) Download(videoPath string, language Language) (subtitlePath string, err error) {
+	// Get unique hash to identify video
+	hash, err := getHashOfVideo(videoPath)
+	if err != nil {
+		return "", err
+	}
+	// Call SubDB API to get subtitle
+	lang, ok := subdbLangs[language.ID]
+	if !ok {
+		return "", errors.New("Language exists but is not available for SubDB")
+	}
+	subtitle, err := subtitles(hash, lang)
+	if err != nil {
+		return "", err
+	}
+
+	// Save the content to file
+	subtitlePath = videoPath[0:len(videoPath)-len(path.Ext(videoPath))] + ".srt"
+
+	err = ioutil.WriteFile(subtitlePath, subtitle, 0644)
+	if err != nil {
+		return "", fmt.Errorf("Can't save the file %v because of : %v", subtitlePath, err)
+	}
+
+	return subtitlePath, nil
+}
+
+// Upload uploads the subtitle to SubDB, for the given video
+func (s SubDBAPI) Upload(subtitlePath string, langauge Language, videoPath string) error {
+	return errors.New("Not yet implemented")
+}
+
+// GetName returns the name of the api
+func (s SubDBAPI) GetName() string {
+	return s.Name
+}
+
+// GetAliases returns aliases to identify this API
+func (s SubDBAPI) GetAliases() []string {
+	return s.Aliases
+}
 
 // options describes parameters to the SubDB API
 type options struct {
@@ -60,10 +138,10 @@ func getHashOfVideo(filename string) (string, error) {
 }
 
 func buildURL(hash string, language string) string {
-	baseURL := prodURL
+	baseURL := subdbProdURL
 	if config.Dev {
 		fmt.Println("Dev mode")
-		baseURL = devURL
+		baseURL = subdbDevURL
 	} else {
 		fmt.Println("Prod mode")
 	}
@@ -84,7 +162,7 @@ func subtitles(hash string, language string) ([]byte, error) {
 	// Build request
 	req := fluent.New()
 	req.Get(buildURL(hash, language)).
-		SetHeader("User-Agent", userAgent).
+		SetHeader("User-Agent", subDbUserAgent).
 		InitialInterval(time.Duration(time.Millisecond)).
 		Retry(3)
 
