@@ -134,6 +134,7 @@ apis = "SubDB,OpenSubtitles,Addic7ed" # Searching from these sites
   * Addic7ed implementation
   * Refactoring
   * Vendoring with dep
+  * Dropping 32bit support
 * **0.1.1** Jan 31, 2016
   * Language checking
   * OpenSubtitles API implementation
