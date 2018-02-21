@@ -103,7 +103,7 @@ func (l Langs) Print(all bool) {
 	table.Render() // Send output
 }
 
-//Languages is the list of all langauges
+//Languages is the list of all languages
 var Languages = Langs{
 	{"aar", []string{"aa"}, "Afar, afar"},
 	{"abk", []string{"ab"}, "Abkhazian"},
@@ -514,7 +514,6 @@ var Languages = Langs{
 	{"tam", []string{"ta"}, "Tamil"},
 	{"tat", []string{"tt"}, "Tatar"},
 	{"tel", []string{"te"}, "Telugu"},
-	{"tem", []string{}, "Timne"},
 	{"ter", []string{}, "Tereno"},
 	{"tet", []string{}, "Tetum"},
 	{"tgk", []string{"tg"}, "Tajik"},

@@ -39,7 +39,7 @@ func init() {
 	RootCmd.PersistentFlags().BoolVarP(&config.Verbose, "verbose", "v", false,
 		"Print more information while executing")
 	RootCmd.PersistentFlags().BoolVarP(&config.Dev, "dev", "", false,
-		"Instanciate development sandbox instead of production variables")
+		"Instantiate development sandbox instead of production variables")
 	viper.BindPFlag("root.dev", RootCmd.PersistentFlags().Lookup("dev"))
 	viper.BindPFlag("root.verbose", RootCmd.PersistentFlags().Lookup("verbose"))
 }

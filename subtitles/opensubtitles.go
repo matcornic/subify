@@ -132,7 +132,7 @@ func (s OSDBAPI) Download(videoPath string, language Language) (subtitlePath str
 }
 
 // Upload uploads the subtitle to OpenSubtitles, for the given video
-func (s OSDBAPI) Upload(subtitlePath string, langauge Language, videoPath string) error {
+func (s OSDBAPI) Upload(subtitlePath string, language Language, videoPath string) error {
 	return errors.New("Not yet implemented")
 }
 

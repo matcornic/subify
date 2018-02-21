@@ -33,13 +33,13 @@ var subdbLangs = map[string]string{
 	"pob": "pt",
 }
 
-// API entry point
+// SubDBAPI entry point
 type SubDBAPI struct {
 	Name    string
 	Aliases []string
 }
 
-// New creates a new API for OpenSubtitles
+// SubDB creates a new API for OpenSubtitles
 func SubDB() SubDBAPI {
 	return SubDBAPI{
 		Name:    "SubDB",
@@ -76,7 +76,7 @@ func (s SubDBAPI) Download(videoPath string, language Language) (subtitlePath st
 }
 
 // Upload uploads the subtitle to SubDB, for the given video
-func (s SubDBAPI) Upload(subtitlePath string, langauge Language, videoPath string) error {
+func (s SubDBAPI) Upload(subtitlePath string, language Language, videoPath string) error {
 	return errors.New("Not yet implemented")
 }
 

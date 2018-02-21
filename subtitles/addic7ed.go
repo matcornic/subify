@@ -8,6 +8,7 @@ import (
 	logger "github.com/spf13/jwalterweatherman"
 )
 
+// Addic7edAPI is the endpoint for downloading Addic7ed subtitles
 type Addic7edAPI struct {
 	Name    string
 	Aliases []string
@@ -104,7 +105,7 @@ func (s Addic7edAPI) Download(videoPath string, language Language) (subtitlePath
 }
 
 // Upload uploads the subtitle to OpenSubtitles, for the given video
-func (s Addic7edAPI) Upload(subtitlePath string, langauge Language, videoPath string) error {
+func (s Addic7edAPI) Upload(subtitlePath string, language Language, videoPath string) error {
 	return errors.New("Not yet implemented")
 }
 
