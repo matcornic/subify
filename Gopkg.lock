@@ -26,6 +26,12 @@
   version = "v1.7"
 
 [[projects]]
+  branch = "master"
+  name = "github.com/deckarep/gosx-notifier"
+  packages = ["."]
+  revision = "e127226297fb751aa3b582db5e92361fcbfc5a6c"
+
+[[projects]]
   name = "github.com/fsnotify/fsnotify"
   packages = ["."]
   revision = "c2828203cd70a50dcccfb2761f8b1f8ceef9a8e9"
@@ -40,7 +46,17 @@
 [[projects]]
   branch = "master"
   name = "github.com/hashicorp/hcl"
-  packages = [".","hcl/ast","hcl/parser","hcl/scanner","hcl/strconv","hcl/token","json/parser","json/scanner","json/token"]
+  packages = [
+    ".",
+    "hcl/ast",
+    "hcl/parser",
+    "hcl/scanner",
+    "hcl/strconv",
+    "hcl/token",
+    "json/parser",
+    "json/scanner",
+    "json/token"
+  ]
   revision = "23c074d0eceb2b8a5bfdbb271ab780cde70f05a8"
 
 [[projects]]
@@ -48,6 +64,12 @@
   packages = ["."]
   revision = "76626ae9c91c4f2a10f34cad8ce83ea42c93bb75"
   version = "v1.0"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/jacobmarshall/go-toast"
+  packages = ["."]
+  revision = "b700e246b8b6d3e13554091e540e1019e26389f1"
 
 [[projects]]
   branch = "master"
@@ -99,6 +121,12 @@
 
 [[projects]]
   branch = "master"
+  name = "github.com/nu7hatch/gouuid"
+  packages = ["."]
+  revision = "179d4d0c4d8d407a32af483c2354df1d2c91e6c3"
+
+[[projects]]
+  branch = "master"
   name = "github.com/olekukonko/tablewriter"
   packages = ["."]
   revision = "b8a9be070da40449e501c3c4730a889e42d87a9e"
@@ -129,7 +157,10 @@
 
 [[projects]]
   name = "github.com/spf13/afero"
-  packages = [".","mem"]
+  packages = [
+    ".",
+    "mem"
+  ]
   revision = "bb8f1927f2a9d3ab41c9340aa034f6b803f4359c"
   version = "v1.0.2"
 
@@ -172,7 +203,10 @@
 [[projects]]
   branch = "master"
   name = "golang.org/x/net"
-  packages = ["html","html/atom"]
+  packages = [
+    "html",
+    "html/atom"
+  ]
   revision = "cbe0f9307d0156177f9dd5dc85da1a31abc5f2fb"
 
 [[projects]]
@@ -184,7 +218,14 @@
 [[projects]]
   branch = "master"
   name = "golang.org/x/text"
-  packages = ["internal/gen","internal/triegen","internal/ucd","transform","unicode/cldr","unicode/norm"]
+  packages = [
+    "internal/gen",
+    "internal/triegen",
+    "internal/ucd",
+    "transform",
+    "unicode/cldr",
+    "unicode/norm"
+  ]
   revision = "4e4a3210bb54bb31f6ab2cdca2edcc0b50c420c1"
 
 [[projects]]
@@ -196,6 +237,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "0ae8c2469eed3716af30622012d4506fa36c90fc40b35867d4efb5026b6beb93"
+  inputs-digest = "b9e1df25590aa0c9bcee05fb838618e5f6d77516799e5911cb1f46f2e61426aa"
   solver-name = "gps-cdcl"
   solver-version = 1

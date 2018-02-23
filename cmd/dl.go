@@ -33,7 +33,6 @@ Give the path of your video as first parameter and let's go !`,
 		if err != nil {
 			utils.ExitPrintError(err, "Sadly, we could not download any subtitle for you. Try another time or contribute to the apis. See 'subify upload -h'")
 		}
-
 		if openVideo {
 			open.Run(videoPath)
 		}
