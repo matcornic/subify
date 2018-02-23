@@ -1,4 +1,5 @@
-# Subify
+<img align="right" height="200px" src="https://raw.githubusercontent.com/matcornic/subify/logo/images/logo.png"/>
+
 Subify is a tool to download subtitles for your favorite TV shows and movies.
 It is directly able to open the video with your default player, once the subtitle is downloaded.
 
@@ -134,6 +135,7 @@ apis = "SubDB,OpenSubtitles,Addic7ed" # Searching from these sites
   * Addic7ed implementation
   * Refactoring
   * Vendoring with dep
+  * Dropping 32bit support
 * **0.1.1** Jan 31, 2016
   * Language checking
   * OpenSubtitles API implementation
