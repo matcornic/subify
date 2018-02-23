@@ -19,7 +19,33 @@ If you use Golang, you can get Subify and its binary directly with :
 go get -u github.com/matcornic/subify
 ```
 
-> On **Mac OS**, bring the power of Service Automator to [add a "Subify" option in the Finder menu for your videos](https://github.com/matcornic/subify/wiki/Adding-a-Subify-option-in-the-Finder-menu-for-your-videos).
+### Mac OS
+
+In MacOS, you can use the power of **Service Automator** to add *Subify* options in the Finder contextual menu for your videos.
+
+![Subify in one click](./images/subify_macos_service.png)
+
+* Open Automator
+* Create a Service
+* On top :
+  * Service receives select => *Movie files*
+  * In => *Any application*
+* Drag & drop a *Run shell script* action
+  * Shell => `bin/bash`
+  * Pass input => *as argument*
+  * Copy the following code in the input :
+
+```shell
+# Change "/projects/go/bin/subify" by the path of your downloaded binary
+# Use the commaned you want. Commands are explained below
+/projects/go/bin/subify dl "$1" -o
+```
+
+* Save to service with the name that you want to be displayed in the Finder menu (e.g. *Subify - download subtitle and play video*)
+* Enjoy your video with subtitles in one click
+* Create as many as service you need (*don't open video*, *change API order*, *change language*, and so on)
+
+![Subify in Automator](./images/subify_macos_automator.png)
 
 ## Get started
 Note : the binary is usable as is. If you want to run the command from anywhere on your OS, make sure to add Subify home installation to your PATH environment variable
@@ -131,6 +157,9 @@ apis = "SubDB,OpenSubtitles,Addic7ed" # Searching from these sites
 ```
 
 ## Release Notes
+* **0.3.0** Feb 23, 2018
+  * Add system notifications (for Linux, Windows and MacOS)
+  * Add version command
 * **0.2.0** Feb 19, 2018
   * Addic7ed implementation
   * Refactoring
