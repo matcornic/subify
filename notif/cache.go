@@ -52,11 +52,7 @@ func requestToPath(url, path string) error {
 	if err != nil {
 		return err
 	}
-	err = ioutil.WriteFile(path, data, 0777)
-	if err != nil {
-		return err
-	}
-	return nil
+	return ioutil.WriteFile(path, data, 0777)
 }
 
 // downloadIcon downloads the icon if needed
