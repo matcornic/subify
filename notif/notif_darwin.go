@@ -15,7 +15,7 @@ func SendSubtitleDownloadSuccess(successAPI string) {
 
 // SendSubtitleCouldNotBeDownloaded sends a notification when download went bad
 func SendSubtitleCouldNotBeDownloaded(noSucessAPIs string) {
-	Error("‼️ I didn't found any subtitle 😭", fmt.Sprintf("No match for your video in : %s. Try later !", noSucessAPIs)))
+	Error("‼️ I didn't found any subtitle 😭", fmt.Sprintf("No match for your video in : %s. Try later !", noSucessAPIs))
 }
 
 // Error send a notification error
