@@ -61,7 +61,7 @@ func requestToPath(url, path string) error {
 
 // downloadIcon downloads the icon if needed
 func downloadIcon() string {
-	path, _ := getCachePath(subifyIconsFolder, "icon.png")
+	path, _ := getCachePath(subifyIconsFolder, subifyIconName)
 	if !existsInCache(path) {
 		err := requestToPath(iconURL, path)
 		if err != nil {

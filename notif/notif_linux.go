@@ -17,7 +17,7 @@ func SendSubtitleCouldNotBeDownloaded(noSucessAPIs string) {
 
 func sendMessage(title, message string) error {
 	subifyIcon := downloadIcon()
-	exec.Command("notify-send", "-i", subifyIcon, fmt.Sprintf("Subify - %s", title), message).Run()
+	return exec.Command("notify-send", "-i", subifyIcon, fmt.Sprintf("Subify - %s", title), message).Run()
 }
 
 // Error send a notification error
