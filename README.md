@@ -1,4 +1,4 @@
-<div style="text-align:center"><img height="200px" src="https://raw.githubusercontent.com/matcornic/subify/logo/images/logo.png"/></div>
+<img align="center" height="200px" src="https://raw.githubusercontent.com/matcornic/subify/logo/images/logo.png"/>
 
 Subify is a tool to download subtitles for your favorite TV shows and movies.
 It is directly able to open the video with your default player, once the subtitle is downloaded.
