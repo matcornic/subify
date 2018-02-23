@@ -6,6 +6,7 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/matcornic/subify/notif"
 	"github.com/olekukonko/tablewriter"
 	logger "github.com/spf13/jwalterweatherman"
 )
@@ -106,6 +107,7 @@ browselang:
 			logger.INFO.Println("=> (" + strconv.Itoa(i+1) + "." + strconv.Itoa(j+1) + ") Downloading subtitle with " + api.GetName() + "...")
 			subtitlePath, err = api.Download(videoPath, lang)
 			if err == nil {
+				notif.SendSubtitleDownloadSuccess(api.GetName())
 				logger.INFO.Println(lang.Description, "subtitle found and saved to ", subtitlePath)
 				break browselang
 			} else {
@@ -124,6 +126,7 @@ browselang:
 	}
 
 	if err != nil {
+		notif.SendSubtitleCouldNotBeDownloaded(a.String())
 		return fmt.Errorf("No %v subtitle found, even after searching in all APIs (%v)", strings.Join(l.GetDescriptions(), ", nor "), a.String())
 	}
 
