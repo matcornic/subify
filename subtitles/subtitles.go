@@ -107,7 +107,7 @@ browselang:
 			logger.INFO.Println("=> (" + strconv.Itoa(i+1) + "." + strconv.Itoa(j+1) + ") Downloading subtitle with " + api.GetName() + "...")
 			subtitlePath, err = api.Download(videoPath, lang)
 			if err == nil {
-				notif.Info("Subify - I found a subtitle for your video 😎", fmt.Sprintf("Thank you %s ❤️", api.GetName()))
+				notif.SendSubtitleDownloadSuccess(api.GetName())
 				logger.INFO.Println(lang.Description, "subtitle found and saved to ", subtitlePath)
 				break browselang
 			} else {
@@ -126,7 +126,7 @@ browselang:
 	}
 
 	if err != nil {
-		notif.Error("‼️ Subify - I didn't found any subtitle 😭", fmt.Sprintf("No match for your video in : %s. Try later !", a.String()))
+		notif.SendSubtitleCouldNotBeDownloaded(a.String())
 		return fmt.Errorf("No %v subtitle found, even after searching in all APIs (%v)", strings.Join(l.GetDescriptions(), ", nor "), a.String())
 	}
 
