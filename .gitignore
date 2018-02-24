@@ -30,6 +30,11 @@ _testmain.go
 .goxc.local.json
 
 subify
+subify_freebsd_amd64
+subify_netbsd_amd64
+subify_openbsd_amd64
+subify_linux_amd64
+subify_darwin_amd64
 debug
 debian/
 vendor/
