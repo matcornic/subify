@@ -1,0 +1,15 @@
+{
+    "DisableAll": true,
+    "Enable": [
+        "megacheck",
+        "vet",
+        "vetshadow",
+        "deadcode",
+        "gofmt",
+        "golint",
+        "ineffassign",
+        "goconst",
+        "misspell"
+    ],
+    "Test": true
+}

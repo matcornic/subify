@@ -1,0 +1,16 @@
+language: go
+go: 
+  - 1.x
+  - master
+  
+before_install:
+  - go get -t -v ./...
+
+install:
+  - go get github.com/deckarep/golang-set
+
+script:
+  - go test -v -race -coverprofile=coverage.txt -covermode=atomic
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
