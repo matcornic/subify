@@ -24,6 +24,7 @@ go get -u github.com/matcornic/subify
 In MacOS, you can use the power of **Service Automator** to add *Subify* options in the Finder contextual menu for your videos.
 
 ![Subify in one click](./images/subify_macos_service.png)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fmatcornic%2Fsubify.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fmatcornic%2Fsubify?ref=badge_shield)
 
 * Open Automator
 * Create a Service
@@ -181,3 +182,6 @@ apis = "SubDB,OpenSubtitles,Addic7ed" # Searching from these sites
 ## License
 
 Subify is released under the Apache 2.0 license. See LICENSE.txt
+
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fmatcornic%2Fsubify.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fmatcornic%2Fsubify?ref=badge_large)
