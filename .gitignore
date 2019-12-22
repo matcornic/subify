@@ -39,3 +39,4 @@ debug
 debian/
 
 coverage.txt
+cross-compilation/*
