@@ -94,7 +94,7 @@ func (s Addic7edAPI) Download(videoPath string, language Language) (subtitlePath
 	}
 
 	// Saving to disk
-	subtitlePath = videoPath[0:len(videoPath)-len(path.Ext(videoPath))] + ".srt"
+	subtitlePath = videoPath[0:len(videoPath)-len(path.Ext(videoPath))] + "." + lang + ".srt"
 	if err := subtitle.DownloadTo(subtitlePath); err != nil {
 		return "", err
 	}

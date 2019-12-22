@@ -65,7 +65,7 @@ func (s SubDBAPI) Download(videoPath string, language Language) (subtitlePath st
 	}
 
 	// Save the content to file
-	subtitlePath = videoPath[0:len(videoPath)-len(path.Ext(videoPath))] + ".srt"
+	subtitlePath = videoPath[0:len(videoPath)-len(path.Ext(videoPath))] + "." + lang + ".srt"
 
 	err = ioutil.WriteFile(subtitlePath, subtitle, 0644)
 	if err != nil {
