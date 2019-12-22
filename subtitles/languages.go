@@ -29,11 +29,11 @@ type Langs []Language
 // GetLanguage get the language from an id
 func (l Langs) GetLanguage(id string) (lang *Language) {
 	for _, v := range l {
-		if strings.ToLower(strings.TrimSpace(v.ID)) == strings.ToLower(strings.TrimSpace(id)) {
+		if strings.EqualFold(strings.TrimSpace(v.ID), strings.TrimSpace(id)) {
 			return &v
 		}
 		for _, a := range v.Alias {
-			if strings.ToLower(strings.TrimSpace(a)) == strings.ToLower(strings.TrimSpace(id)) {
+			if strings.EqualFold(strings.TrimSpace(a), strings.TrimSpace(id)) {
 				return &v
 			}
 		}
@@ -85,14 +85,14 @@ func (l Langs) Print(all bool) {
 				available = "Yes"
 			}
 			values := []string{
-				l.Description,                             // Language
+				l.Description, // Language
 				strings.Join(append(l.Alias, l.ID), ", "), // Id(s)
 				available, // Available ?
 			}
 			table.Append(values)
 		} else if subOK || osOK {
 			values := []string{
-				l.Description,                             // Language
+				l.Description, // Language
 				strings.Join(append(l.Alias, l.ID), ", "), // Available Id(s)
 			}
 			table.Append(values)

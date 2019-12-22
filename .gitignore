@@ -37,3 +37,5 @@ subify_linux_amd64
 subify_darwin_amd64
 debug
 debian/
+
+coverage.txt

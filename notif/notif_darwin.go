@@ -10,12 +10,12 @@ const notificationGroup = "com.matcornic.subify"
 
 // SendSubtitleDownloadSuccess sends a notification when download went well
 func SendSubtitleDownloadSuccess(successAPI string) {
-	Info("I found a subtitle for your video 😎", fmt.Sprintf("Thank you %s ❤️", successAPI))
+	_ = Info("I found a subtitle for your video 😎", fmt.Sprintf("Thank you %s ❤️", successAPI))
 }
 
 // SendSubtitleCouldNotBeDownloaded sends a notification when download went bad
 func SendSubtitleCouldNotBeDownloaded(noSucessAPIs string) {
-	Error("‼️ I didn't found any subtitle 😭", fmt.Sprintf("No match for your video in : %s. Try later !", noSucessAPIs))
+	_ = Error("‼️ I didn't found any subtitle 😭", fmt.Sprintf("No match for your video in : %s. Try later !", noSucessAPIs))
 }
 
 // Error send a notification error

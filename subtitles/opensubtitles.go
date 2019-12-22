@@ -121,7 +121,7 @@ func (s OSDBAPI) Download(videoPath string, language Language) (subtitlePath str
 	}
 
 	// Saving to disk
-	subtitlePath = videoPath[0:len(videoPath)-len(path.Ext(videoPath))] + ".srt"
+	subtitlePath = videoPath[0:len(videoPath)-len(path.Ext(videoPath))] + "." + lang + ".srt"
 	if err := c.DownloadTo(best, subtitlePath); err != nil {
 		return "", err
 	}

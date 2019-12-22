@@ -12,6 +12,7 @@ Subify gets the best match from several APIs in this order. This default behavio
 3. Addic7ed
 
 ## Installing
+
 Download the [latest version of Subify](https://github.com/matcornic/subify/releases), and that's it. No need to install something else. Works on Linux, Mac OS (Darwin) and Windows
 
 If you use Golang, you can get Subify and its binary directly with :
@@ -47,6 +48,25 @@ In MacOS, you can use the power of **Service Automator** to add *Subify* options
 
 ![Subify in Automator](./images/subify_macos_automator.png)
 
+### Windows
+
+In Windows, you can use Shortcuts do to approximately the same. 
+
+- Open Run (win + R) and execute `shell:sendto` (this will navigate to the folder with the "Send to" context menu shortcuts)
+- Add an new shortcut
+- Location: `C:\Windows\System32\cmd.exe /k "C:\tools\subify.exe dl -o"` (Change the subify command if needed)
+- Choose an name, like "Subtitle and open"
+
+And you're done! Just right mouse click on an video and Send to > Subtitle and open. It will find the subtitle and open the video.
+
+Issues:
+
+- You have to add the first part to prevent the `You need to open cmd.exe and run it from there.` warning. This makes sense if there is no file parameter, but the Send to functionality in explorer automatically adds this.
+- You can not change the icon. (Changing it will replace the CMD shortcut icon everywhere)
+- After opening there is still an CMD window open. You can fix this by changing `/k` to `/c`, but then you will never know when an error occurs.
+
+> Thanks @AndreasFurster for finding this tip. 
+
 ## Get started
 Note : the binary is usable as is. If you want to run the command from anywhere on your OS, make sure to add Subify home installation to your PATH environment variable
 
@@ -76,11 +96,14 @@ Usage:
 
 Available Commands:
   dl          Download the subtitles for your video - 'subify dl --help'
-  list        List information about something (ex: languages)
+  help        Help about any command
+  list        List information about something
+  version     Get version of Subify
 
 Flags:
-      --config string   Config file (default is $HOME/.subify.|json|yaml|toml). Edit to change default behaviour
-      --dev             Instanciate development sandbox instead of production variables
+      --config string   Config file (default is $HOME/.subify.yaml|json|toml). Edit to change default behavior
+      --dev             Instantiate development sandbox instead of production variables
+  -h, --help            help for subify
   -v, --verbose         Print more information while executing
 
 Use "subify [command] --help" for more information about a command.
@@ -97,15 +120,16 @@ Usage:
 Aliases:
   dl, download
 
-
 Flags:
-  -a, --apis value        Overwrite default searching APIs behavior, hence the subtitles are downloaded. Available apis at 'subify list apis' (default [SubDB,OpenSubtitles,Addic7ed])
-  -l, --languages value   Languages of the subtitle separate by a comma (First to match is downloaded). Available languages at 'subify list languages' (default [en])
-  -o, --open              Once the subtitle is downloaded, open the video with your default video player (OSX: "open", Windows: "start", Linux/Other: "xdg-open")
+  -a, --apis string        Overwrite default searching APIs behavior, hence the subtitles are downloaded. Available APIs at 'subify list apis' (default "SubDB,OpenSubtitles,Addic7ed")
+  -h, --help               help for dl
+  -l, --languages string   Languages of the subtitle separate by a comma (First to match is downloaded). Available languages at 'subify list languages' (default "en")
+  -n, --notify             Display desktop notification (default true)
+  -o, --open               Once the subtitle is downloaded, open the video with your default video player (OSX: "open", Windows: "start", Linux/Other: "xdg-open")
 
 Global Flags:
-      --config string   Config file (default is $HOME/.subify.|json|yaml|toml). Edit to change default behavior
-      --dev             Instanciate development sandbox instead of production variables
+      --config string   Config file (default is $HOME/.subify.yaml|json|toml). Edit to change default behavior
+      --dev             Instantiate development sandbox instead of production variables
   -v, --verbose         Print more information while executing
 ```
 
@@ -139,6 +163,17 @@ Global Flags:
   -v, --verbose         Print more information while executing
 ```
 
+## Compile from source
+
+Binaries for common Operating Systems and architectures are available in [Release page](https://github.com/matcornic/subify/releases). But if you need to compile Subify from source, you can do it as well.
+
+1. [Install Go 1.13+](https://golang.org/doc/install) 
+2. Download Subify: `git clone https://github.com/matcornic/subify.git` (for HTTPS) or `git@github.com:matcornic/subify.git` (for SSH), or `https://github.com/matcornic/subify/archive/master.zip` (for the Zip archive)
+3. Go to the downloaded Subify folder
+4. Run `go get`
+5. Run `go build`
+6. Run `./subify --help` to test if binary is working (you may have to add execution rights on generated file to launch it, for example `chmod u+x ./subify` for Linux)
+
 ## Overriding default configuration
 
 Default configuration can be overridden. Instead of passing the same parameters again and again to the command, you can write a `JSON/YAML/TOML` in your home folder (`$HOME/.subify.|json|yaml|toml`). Here is an example with a `.subify.toml` file :
@@ -154,9 +189,15 @@ dev = false # Don't turn on, just for development purpose
 [download]
 languages = "en" # Searching for theses languages. Can be a list like : "fr,es,en"
 apis = "SubDB,OpenSubtitles,Addic7ed" # Searching from these sites
+notify = false
 ```
 
 ## Release Notes
+* **0.4.0** Dec 22, 2019
+  * System notification can be turned off with option `--notify=false`
+  * Subtitles file contains language in name
+  * Migrate to Go.13 and Go modules
+  * Use golangci-lint instead of Gometalinter (deprecated)
 * **0.3.0** Feb 23, 2018
   * Add system notifications (for Linux, Windows and MacOS)
   * Add version command
