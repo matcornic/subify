@@ -74,7 +74,7 @@ func (c Clients) String() (s string) {
 }
 
 // Download the subtitle from the video identified by its path
-func Download(videoPath string, apiAliases []string, languages []string) error {
+func Download(videoPath string, apiAliases []string, languages []string, notify bool) error {
 	// APIs to download subtitles.
 	var subtitlePath string
 	var err error
@@ -107,7 +107,9 @@ browselang:
 			logger.INFO.Println("=> (" + strconv.Itoa(i+1) + "." + strconv.Itoa(j+1) + ") Downloading subtitle with " + api.GetName() + "...")
 			subtitlePath, err = api.Download(videoPath, lang)
 			if err == nil {
-				notif.SendSubtitleDownloadSuccess(api.GetName())
+				if notify {
+					notif.SendSubtitleDownloadSuccess(api.GetName())
+				}
 				logger.INFO.Println(lang.Description, "subtitle found and saved to ", subtitlePath)
 				break browselang
 			} else {
@@ -126,7 +128,9 @@ browselang:
 	}
 
 	if err != nil {
-		notif.SendSubtitleCouldNotBeDownloaded(a.String())
+		if notify {
+			notif.SendSubtitleCouldNotBeDownloaded(a.String())
+		}
 		return fmt.Errorf("No %v subtitle found, even after searching in all APIs (%v)", strings.Join(l.GetDescriptions(), ", nor "), a.String())
 	}
 
