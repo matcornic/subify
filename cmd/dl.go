@@ -34,7 +34,10 @@ Give the path of your video as first parameter and let's go !`,
 			utils.ExitPrintError(err, "Sadly, we could not download any subtitle for you. Try another time or contribute to the apis. See 'subify upload -h'")
 		}
 		if openVideo {
-			open.Run(videoPath)
+			err := open.Run(videoPath)
+			if err != nil {
+				utils.ExitPrintError(err, "Sadly, we could not open video: %s", videoPath)
+			}
 		}
 	},
 }
@@ -45,8 +48,8 @@ func init() {
 	dlCmd.Flags().BoolVarP(&openVideo, "open", "o", false,
 		"Once the subtitle is downloaded, open the video with your default video player"+
 			` (OSX: "open", Windows: "start", Linux/Other: "xdg-open")`)
-	viper.BindPFlag("download.languages", dlCmd.Flags().Lookup("languages"))
-	viper.BindPFlag("download.apis", dlCmd.Flags().Lookup("apis"))
+	_ = viper.BindPFlag("download.languages", dlCmd.Flags().Lookup("languages"))
+	_ = viper.BindPFlag("download.apis", dlCmd.Flags().Lookup("apis"))
 
 	RootCmd.AddCommand(dlCmd)
 }
