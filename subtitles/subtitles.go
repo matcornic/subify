@@ -36,7 +36,7 @@ func InitAPIs(apiAliases []string) (apis Clients) {
 	for _, alias := range apiAliases {
 		for _, availableAPI := range DefaultAPIs {
 			for _, availableAliases := range availableAPI.GetAliases() {
-				if strings.ToLower(strings.TrimSpace(alias)) == strings.ToLower(strings.TrimSpace(availableAliases)) {
+				if strings.EqualFold(strings.TrimSpace(alias), strings.TrimSpace(availableAliases)) {
 					apis = append(apis, availableAPI)
 				}
 			}
