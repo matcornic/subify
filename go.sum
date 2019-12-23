@@ -90,8 +90,8 @@ github.com/magiconair/properties v1.8.1 h1:ZC2Vc7/ZFkGmsVC9KvOjumD+G5lXy2RtTKyzR
 github.com/magiconair/properties v1.8.1/go.mod h1:PppfXfuXeibc/6YijjN8zIbojt8czPbwD3XqdrwzmxQ=
 github.com/masatana/go-textdistance v0.0.0-20191005053614-738b0edac985 h1:Pz8zZjVRvKxISYimNzLGnzSNl5hYXFSN80FPQ+qt1HE=
 github.com/masatana/go-textdistance v0.0.0-20191005053614-738b0edac985/go.mod h1:1nU7rI+iBPtzc9ZKOqeQacD290rA0wcJLu5AtOSBBPw=
-github.com/matcornic/addic7ed v0.0.0-20180219221400-66d0d2491118 h1:E99reQSX2QxYWdW91D/VCHZakl1iKfcJyOUj4Ikht2Q=
-github.com/matcornic/addic7ed v0.0.0-20180219221400-66d0d2491118/go.mod h1:noK7t9XCnzp2pJIW/KuHxc1hRo5ZytwZzlO7d3Bmxh8=
+github.com/matcornic/addic7ed v0.2.0 h1:aMDcjBDV+VdFV6GGBHhvC63G/gxDlsTbBt1y6RlMpCo=
+github.com/matcornic/addic7ed v0.2.0/go.mod h1:YNST2i1S+eqQF8P4vuZS4BRysMGfYbxP++agbpiMTX0=
 github.com/mattn/go-runewidth v0.0.7 h1:Ei8KR0497xHyKJPAv59M1dkC+rOZCMBJ+t3fZ+twI54=
 github.com/mattn/go-runewidth v0.0.7/go.mod h1:H031xJmbD/WCDINGzjvQ9THkh0rPKHF+m2gUSrubnMI=
 github.com/matttproud/golang_protobuf_extensions v1.0.1/go.mod h1:D8He9yQNgCq6Z5Ld7szi9bcBfOoFv/3dc6xSMkL2PC0=
