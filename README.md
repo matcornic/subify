@@ -193,6 +193,8 @@ notify = false
 ```
 
 ## Release Notes
+* **0.4.1** Dec 23, 2019
+  * Updated Addic7ed library, which was not able to search for subtitles before update
 * **0.4.0** Dec 22, 2019
   * System notification can be turned off with option `--notify=false`
   * Subtitles file contains language in name
