@@ -2,7 +2,7 @@
 
 Thanks so much for wanting to help! We really appreciate it.
 
-* Have an idea for a new feature?
+* Have any idea for a new feature?
 * Want to add a new built-in theme?
 
 Excellent! You've come to the right place.
