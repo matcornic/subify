@@ -62,7 +62,7 @@ func (c Clients) Print() {
 	table.Render() // Send output
 }
 
-//String prints a nice representation of clients
+// String prints a nice representation of clients
 func (c Clients) String() (s string) {
 	for i, v := range c {
 		s = s + v.GetName()
@@ -108,7 +108,7 @@ browselang:
 			subtitlePath, err = api.Download(videoPath, lang)
 			if err == nil {
 				if notify {
-					notif.SendSubtitleDownloadSuccess(api.GetName())
+					notif.SendSubtitleDownloadSuccess(api.GetName(), videoPath)
 				}
 				logger.INFO.Println(lang.Description, "subtitle found and saved to ", subtitlePath)
 				break browselang
@@ -129,7 +129,7 @@ browselang:
 
 	if err != nil {
 		if notify {
-			notif.SendSubtitleCouldNotBeDownloaded(a.String())
+			notif.SendSubtitleCouldNotBeDownloaded(a.String(), videoPath)
 		}
 		return fmt.Errorf("No %v subtitle found, even after searching in all APIs (%v)", strings.Join(l.GetDescriptions(), ", nor "), a.String())
 	}

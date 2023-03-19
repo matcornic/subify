@@ -3,12 +3,12 @@ package notif
 // Notifications are disabled for netbsd but we want a netbsd executable though
 
 // SendSubtitleDownloadSuccess sends a notification when download went well
-func SendSubtitleDownloadSuccess(successAPI string) {
+func SendSubtitleDownloadSuccess(successAPI, videoPath string) {
 	return
 }
 
 // SendSubtitleCouldNotBeDownloaded sends a notification when download went bad
-func SendSubtitleCouldNotBeDownloaded(noSucessAPIs string) {
+func SendSubtitleCouldNotBeDownloaded(noSucessAPIs, videoPath string) {
 	return
 }
 
