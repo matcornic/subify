@@ -100,9 +100,9 @@ func getTargetsFromDirectory(path string) []string {
 
 // isVideoFilename checks if a filename ends in a video extension
 func isVideoFilename(fname string) bool {
-	ext := filepath.Ext(fname)
+	ext := strings.ToLower(filepath.Ext(fname))
 	for _, v := range viper.GetStringSlice("download.extensions") {
-		if "."+v == ext {
+		if "."+strings.ToLower(v) == ext {
 			return true
 		}
 	}
