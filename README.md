@@ -195,7 +195,7 @@ notify = false
 
 ## Release Notes
 * **0.6.0** Apr 2, 2025
-  * Implemented #
+  * Add option to not having the language in the subtitle file name (some player does not support that)
   * Removed Subdb (project is dead)
 * **0.5.0** Apr 2, 2025
   * Migrate to Go 1.23
