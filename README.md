@@ -193,6 +193,9 @@ notify = false
 ```
 
 ## Release Notes
+* **0.5.0** Apr 2, 2025
+  * Migrate to Go 1.23
+  * Updated Addic7ed library (again), as they changed implementation of the download button
 * **0.4.1** Dec 23, 2019
   * Updated Addic7ed library, which was not able to search for subtitles before update
 * **0.4.0** Dec 22, 2019
