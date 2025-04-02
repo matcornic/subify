@@ -80,9 +80,12 @@ func Addic7ed() Addic7edAPI {
 }
 
 // Download downloads the Addic7ed subtitle from a video
-func (s Addic7edAPI) Download(videoPath string, language Language) (subtitlePath string, err error) {
+func (s Addic7edAPI) Download(videoPath string, language Language, downloadOptions ...func(*DownloadOptions)) (subtitlePath string, err error) {
 	c := addic7ed.New()
-
+	options := &DownloadOptions{}
+	for _, o := range downloadOptions {
+		o(options)
+	}
 	lang, ok := addic7edLangs[language.ID]
 	if !ok {
 		return "", errors.New("Language exists but is not available for Addic7ed")
@@ -94,7 +97,12 @@ func (s Addic7edAPI) Download(videoPath string, language Language) (subtitlePath
 	}
 
 	// Saving to disk
-	subtitlePath = videoPath[0:len(videoPath)-len(path.Ext(videoPath))] + "." + lang + ".srt"
+	basePath := videoPath[0 : len(videoPath)-len(path.Ext(videoPath))]
+	if options.langInFileName {
+		subtitlePath = basePath + "." + lang + ".srt"
+	} else {
+		subtitlePath = basePath + ".srt"
+	}
 	if err := subtitle.DownloadTo(subtitlePath); err != nil {
 		return "", err
 	}

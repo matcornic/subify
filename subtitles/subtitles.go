@@ -6,14 +6,32 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/matcornic/subify/notif"
 	"github.com/olekukonko/tablewriter"
 	logger "github.com/spf13/jwalterweatherman"
+
+	"github.com/matcornic/subify/notif"
 )
+
+type DownloadOptions struct {
+	langInFileName bool
+	notify         bool
+}
+
+func WithLangInFileName() func(*DownloadOptions) {
+	return func(s *DownloadOptions) {
+		s.langInFileName = true
+	}
+}
+
+func WithOSNotification() func(*DownloadOptions) {
+	return func(s *DownloadOptions) {
+		s.notify = true
+	}
+}
 
 // Client defines the interface to get subtitles from API
 type Client interface {
-	Download(videoPath string, language Language) (subtitlePath string, err error)
+	Download(videoPath string, language Language, options ...func(*DownloadOptions)) (subtitlePath string, err error)
 	Upload(subtitlePath string, language Language, videoPath string) error
 	GetName() string
 	GetAliases() []string
@@ -25,7 +43,6 @@ type Clients []Client
 // DefaultAPIs represents the available APIs
 // Is also used as the default
 var DefaultAPIs = Clients{
-	SubDB(),
 	OpenSubtitles(),
 	Addic7ed(),
 }
@@ -62,7 +79,7 @@ func (c Clients) Print() {
 	table.Render() // Send output
 }
 
-//String prints a nice representation of clients
+// String prints a nice representation of clients
 func (c Clients) String() (s string) {
 	for i, v := range c {
 		s = s + v.GetName()
@@ -74,7 +91,7 @@ func (c Clients) String() (s string) {
 }
 
 // Download the subtitle from the video identified by its path
-func Download(videoPath string, apiAliases []string, languages []string, notify bool) error {
+func Download(videoPath string, apiAliases []string, languages []string, downloadOptions ...func(*DownloadOptions)) error {
 	// APIs to download subtitles.
 	var subtitlePath string
 	var err error
@@ -98,6 +115,11 @@ func Download(videoPath string, apiAliases []string, languages []string, notify 
 		logger.WARN.Println("Some languages are not recognized. Given:", languages, "Found:", l.GetDescriptions())
 	}
 
+	options := &DownloadOptions{}
+	for _, o := range downloadOptions {
+		o(options)
+	}
+
 	// Run through languages
 browselang:
 	for i, lang := range l {
@@ -105,9 +127,9 @@ browselang:
 		logger.INFO.Println("===> ("+strconv.Itoa(i+1)+") Searching subtitles for", lang.Description, "language")
 		for j, api := range a {
 			logger.INFO.Println("=> (" + strconv.Itoa(i+1) + "." + strconv.Itoa(j+1) + ") Downloading subtitle with " + api.GetName() + "...")
-			subtitlePath, err = api.Download(videoPath, lang)
+			subtitlePath, err = api.Download(videoPath, lang, downloadOptions...)
 			if err == nil {
-				if notify {
+				if options.notify {
 					notif.SendSubtitleDownloadSuccess(api.GetName())
 				}
 				logger.INFO.Println(lang.Description, "subtitle found and saved to ", subtitlePath)
@@ -128,7 +150,7 @@ browselang:
 	}
 
 	if err != nil {
-		if notify {
+		if options.notify {
 			notif.SendSubtitleCouldNotBeDownloaded(a.String())
 		}
 		return fmt.Errorf("No %v subtitle found, even after searching in all APIs (%v)", strings.Join(l.GetDescriptions(), ", nor "), a.String())
