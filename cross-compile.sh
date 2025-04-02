@@ -2,9 +2,7 @@
 
 VERSION="$1"
 CROSS_COMPILE_OS_AND_ARCHS=$(cat <<-END
-darwin	386
 darwin	amd64
-darwin	arm
 darwin	arm64
 freebsd	386
 freebsd	amd64
