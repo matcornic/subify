@@ -3,13 +3,12 @@
 Subify is a tool to download subtitles for your favorite TV shows and movies.
 It is directly able to open the video with your default player, once the subtitle is downloaded.
 
-Subify combines [SubDB Web API](http://thesubdb.com/), [OpenSubtitles API](http://trac.opensubtitles.org/projects/opensubtitles/wiki) and [Addic7ed](http://www.addic7ed.com/) to get the best subtitles for your video. It also considers that you use a default player interpreting srt subtitles when the video file name is the same than the srt file (ex: [VLC](http://www.videolan.org/vlc/)).
+Subify combines [OpenSubtitles API](http://trac.opensubtitles.org/projects/opensubtitles/wiki) and [Addic7ed](http://www.addic7ed.com/) to get the best subtitles for your video. It also considers that you use a default player interpreting srt subtitles when the video file name is the same than the srt file (ex: [VLC](http://www.videolan.org/vlc/)).
 
 Subify gets the best match from several APIs in this order. This default behavior can easily be changed. See the documentation below
 
-1. SubDB
-2. OpenSubtitles
-3. Addic7ed
+1. OpenSubtitles
+2. Addic7ed
 
 ## Installing
 
@@ -71,16 +70,16 @@ Issues:
 Note : the binary is usable as is. If you want to run the command from anywhere on your OS, make sure to add Subify home installation to your PATH environment variable
 
 ```shell
-# Download subtitle with default language (English) from default APIs (SubDB, then OpenSubtitles, then Addic7ed)
+# Download subtitle with default language (English) from default APIs (OpenSubtitles, then Addic7ed)
 subify dl <path_to_your_video>
-# Download subtitle with default language (English), from default APIs (SubDB, then OpenSubtitles, then Addic7ed), then open video with your default player
+# Download subtitle with default language (English), from default APIs (OpenSubtitles, then Addic7ed), then open video with your default player
 subify dl <path_to_your_video> -o
-# Download subtitle with french language, from default APIs (SubDB, then OpenSubtitles, then Addic7ed), and open with your default player
+# Download subtitle with french language, from default APIs (OpenSubtitles, then Addic7ed), and open with your default player
 subify dl <path_to_your_video> -o -l fr
-# Download subtitle with french language, if not found spanish, if not found english, from default APIs (SubDB, then OpenSubtitles, then Addic7ed)
+# Download subtitle with french language, if not found spanish, if not found english, from default APIs (OpenSubtitles, then Addic7ed)
 subify dl <path_to_your_video> -l fr,es,en
-# Download subtitle with default language, by searching first in OpenSubtitles, then in SubDB
-subify dl <path_to_your_video> -a os,subdb
+# Download subtitle with default language, by searching first in Addic7ed then OpenSubtitles
+subify dl <path_to_your_video> -a add,os
 # Download subtitle with default language, by searching only in OpenSubtitles
 subify dl <path_to_your_video> -a OpenSubtitles
 ```
@@ -121,9 +120,10 @@ Aliases:
   dl, download
 
 Flags:
-  -a, --apis string        Overwrite default searching APIs behavior, hence the subtitles are downloaded. Available APIs at 'subify list apis' (default "SubDB,OpenSubtitles,Addic7ed")
+  -a, --apis string        Overwrite default searching APIs behavior, hence the subtitles are downloaded. Available APIs at 'subify list apis' (default "OpenSubtitles,Addic7ed")
   -h, --help               help for dl
-  -l, --languages string   Languages of the subtitle separate by a comma (First to match is downloaded). Available languages at 'subify list languages' (default "en")
+      --lang-in-filename   Language is in the filename (e.g. if enabled: 'xxx.English.srt' for English), else 'xxx.srt' (default true)
+  -l, --languages string   Languages of the subtitle separated by a comma (First to match is downloaded). Available languages at 'subify list languages' (default "en")
   -n, --notify             Display desktop notification (default true)
   -o, --open               Once the subtitle is downloaded, open the video with your default video player (OSX: "open", Windows: "start", Linux/Other: "xdg-open")
 
@@ -131,6 +131,7 @@ Global Flags:
       --config string   Config file (default is $HOME/.subify.yaml|json|toml). Edit to change default behavior
       --dev             Instantiate development sandbox instead of production variables
   -v, --verbose         Print more information while executing
+
 ```
 
 ### Listing command
@@ -188,11 +189,14 @@ dev = false # Don't turn on, just for development purpose
 # download for the download/dl command
 [download]
 languages = "en" # Searching for theses languages. Can be a list like : "fr,es,en"
-apis = "SubDB,OpenSubtitles,Addic7ed" # Searching from these sites
+apis = "OpenSubtitles,Addic7ed" # Searching from these sites
 notify = false
 ```
 
 ## Release Notes
+* **0.6.0** Apr 2, 2025
+  * Implemented #
+  * Removed Subdb (project is dead)
 * **0.5.0** Apr 2, 2025
   * Migrate to Go 1.23
   * Updated Addic7ed library (again), as they changed implementation of the download button

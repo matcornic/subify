@@ -77,11 +77,11 @@ func (l Langs) Print(all bool) {
 	sort.Sort(ByName(langs))
 
 	for _, l := range langs {
-		_, subOK := subdbLangs[l.ID]
+		_, addOK := addic7edLangs[l.ID]
 		_, osOK := osLangs[l.ID]
 		if all {
 			available := "No"
-			if subOK || osOK {
+			if addOK || osOK {
 				available = "Yes"
 			}
 			values := []string{
@@ -90,7 +90,7 @@ func (l Langs) Print(all bool) {
 				available, // Available ?
 			}
 			table.Append(values)
-		} else if subOK || osOK {
+		} else if addOK || osOK {
 			values := []string{
 				l.Description, // Language
 				strings.Join(append(l.Alias, l.ID), ", "), // Available Id(s)
@@ -103,7 +103,7 @@ func (l Langs) Print(all bool) {
 	table.Render() // Send output
 }
 
-//Languages is the list of all languages
+// Languages is the list of all languages
 var Languages = Langs{
 	{"aar", []string{"aa"}, "Afar, afar"},
 	{"abk", []string{"ab"}, "Abkhazian"},

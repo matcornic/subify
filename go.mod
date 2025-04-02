@@ -4,9 +4,7 @@ go 1.23.8
 
 require (
 	github.com/deckarep/gosx-notifier v0.0.0-20180201035817-e127226297fb
-	github.com/google/go-querystring v1.1.0
 	github.com/jacobmarshall/go-toast v0.0.0-20190211030409-01e6764cf0a4
-	github.com/lafikl/fluent v0.0.0-20141109195914-392b95b3b5b2
 	github.com/matcornic/addic7ed v0.2.1
 	github.com/olekukonko/tablewriter v0.0.5
 	github.com/oz/osdb v0.0.0-20221214175751-f169057712ec
@@ -26,7 +24,6 @@ require (
 	github.com/go-viper/mapstructure/v2 v2.2.1 // indirect
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
 	github.com/kolo/xmlrpc v0.0.0-20220921171641-a4b6fa1dd06b // indirect
-	github.com/lafikl/backoff v0.0.0-20150814094333-4dc77674acea // indirect
 	github.com/masatana/go-textdistance v0.0.0-20191005053614-738b0edac985 // indirect
 	github.com/mattn/go-runewidth v0.0.9 // indirect
 	github.com/nu7hatch/gouuid v0.0.0-20131221200532-179d4d0c4d8d // indirect

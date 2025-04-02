@@ -91,13 +91,17 @@ func OpenSubtitles() OSDBAPI {
 }
 
 // Download downloads the OpenSubtitles subtitle from a video
-func (s OSDBAPI) Download(videoPath string, language Language) (subtitlePath string, err error) {
+func (s OSDBAPI) Download(videoPath string, language Language, downloadOptions ...func(*DownloadOptions)) (subtitlePath string, err error) {
 	c, err := osdb.NewClient()
 	if err != nil {
 		return "", err
 	}
 	c.UserAgent = osdbUserAgent
 
+	options := &DownloadOptions{}
+	for _, o := range downloadOptions {
+		o(options)
+	}
 	// Anonymous login
 	if err = c.LogIn("", "", ""); err != nil {
 		return "", err
@@ -121,7 +125,12 @@ func (s OSDBAPI) Download(videoPath string, language Language) (subtitlePath str
 	}
 
 	// Saving to disk
-	subtitlePath = videoPath[0:len(videoPath)-len(path.Ext(videoPath))] + "." + lang + ".srt"
+	basePath := videoPath[0 : len(videoPath)-len(path.Ext(videoPath))]
+	if options.langInFileName {
+		subtitlePath = basePath + "." + lang + ".srt"
+	} else {
+		subtitlePath = basePath + ".srt"
+	}
 	if err := c.DownloadTo(best, subtitlePath); err != nil {
 		return "", err
 	}
