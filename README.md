@@ -16,7 +16,7 @@ Download the [latest version of Subify](https://github.com/matcornic/subify/rele
 
 If you use Golang, you can get Subify and its binary directly with :
 ```shell
-go get -u github.com/matcornic/subify
+go install github.com/matcornic/subify@latest
 ```
 
 ### Mac OS
